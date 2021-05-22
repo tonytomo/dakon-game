@@ -4,4 +4,7 @@ _Game tradisional di Indonesia. Game ini dibuat menggunakan pure HTML, CSS, dan 
 
 ## Cara bermain
 
-Lupa saya
+Ya begitu, btw ini bot nya ngerandom.
+
+## PROGRESS (100%)
+kalo ada bug bilang..

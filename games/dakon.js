@@ -4,6 +4,11 @@ var i;
 var myVar;
 var arrLength;
 var newIdx;
+var hand;
+
+var setTime;
+
+var dropsound = new Audio('assets/3224__edwin-p-manchester__04.wav')
 const button = document.querySelectorAll(".btn");
 
 // Holes identifier
@@ -26,142 +31,343 @@ function gameBegin() {
     var xh = 100;
     var yh = 50;
 
+    // Add Turn hand
+    hand = new holes(rads, "#414141", 25, 25, 0);
+    hand.update();
+
     // Creating holes
     for (i = 0; i < 16; i++) {
         if (i < 8) {
             if (i != 7) {
-                allHoles.push(new holes(rads, "red", xh, yh, 7));
+                allHoles.push(new holes(rads, "#611414", xh, yh, 7));
                 allHoles[i].update();
                 xh += 50;
             } else {
                 // Hole [7] is the enemy Bank hole
                 yh = 100;
-                allHoles.push(new holes(radb, "red", xh, yh, 0));
+                allHoles.push(new holes(radb, "#611414", xh, yh, 0));
                 allHoles[i].update();
                 xh = 400;
                 yh = 150;
             }
         } else {
             if (i != 15) {
-                allHoles.push(new holes(rads, "blue", xh, yh, 7));
+                allHoles.push(new holes(rads, "#021f55", xh, yh, 7));
                 allHoles[i].update();
                 xh -= 50;
             } else {
                 // Hole [15] is the our Bank hole
                 xh = 50;
                 yh = 100;
-                allHoles.push(new holes(radb, "blue", xh, yh, 0));
+                allHoles.push(new holes(radb, "#021f55", xh, yh, 0));
                 allHoles[i].update();
             }
         }
     }
 }
 
-// Update num every 1 sec
-function updateLoop(idx, i, n) {
-    setTimeout(function () {
-        arrLength = allHoles.length - 1;
-        newIdx = idx + i;
-        // Check if list index is running out
-        if (newIdx > arrLength) {
-            newIdx = newIdx - arrLength - 1;
-        }
-        allHoles[newIdx].addNum();
-        allHoles[newIdx].update();
-
-        i++;
-        if (i <= n) {
-            updateLoop(idx, i, n);
-        } else {
-            enemyTurn();
-        }
-    }, 1000);
-}
-
-// One turn
-function oneTurn(idx) {
-    var n = allHoles[idx].num;
-
-    // Disable button
-    for (i = 0; i < button.length; i++) {
-        button[i].disabled = true;
-    }
-
-    // One turn function here
+// STOP 1
+// Stop 1, if the last seed fall into my empty hole
+function changeMyTurn(idx) {
+    var sum;
     allHoles[idx].clearNum();
+    if (idx == 14) {
+        sum = allHoles[0].num + 1;
+        allHoles[0].clearNum();
+        allHoles[0].update();
+        allHoles[15].sumNum(sum);
+    }
+    if (idx == 13) {
+        sum = allHoles[1].num + 1;
+        allHoles[1].clearNum();
+        allHoles[1].update();
+        allHoles[15].sumNum(sum);
+    }
+    if (idx == 12) {
+        sum = allHoles[2].num + 1;
+        allHoles[2].clearNum();
+        allHoles[2].update();
+        allHoles[15].sumNum(sum);
+    }
+    if (idx == 11) {
+        sum = allHoles[3].num + 1;
+        allHoles[3].clearNum();
+        allHoles[3].update();
+        allHoles[15].sumNum(sum);
+    }
+    if (idx == 10) {
+        sum = allHoles[4].num + 1;
+        allHoles[4].clearNum();
+        allHoles[4].update();
+        allHoles[15].sumNum(sum);
+    }
+    if (idx == 9) {
+        sum = allHoles[5].num + 1;
+        allHoles[5].clearNum();
+        allHoles[5].update();
+        allHoles[15].sumNum(sum);
+    }
+    if (idx == 8) {
+        sum = allHoles[6].num + 1;
+        allHoles[6].clearNum();
+        allHoles[6].update();
+        allHoles[15].sumNum(sum);
+    }
     allHoles[idx].update();
-    i = 1;
-    updateLoop(idx, i, n);
-    // Function End
+    allHoles[15].update();
+    // Enemy turn
+    enemyTurn();
+}
+// Stop 1, if the last seed fall into enemy empty hole
+function changeEnemyTurn(idx) {
+    var sum;
+    allHoles[idx].clearNum();
+    if (idx == 0) {
+        sum = 1 + allHoles[14].num;
+        allHoles[14].clearNum();
+        allHoles[14].update();
+        allHoles[7].sumNum(sum);
+    }
+    if (idx == 1) {
+        sum = 1 + allHoles[13].num;
+        allHoles[13].clearNum();
+        allHoles[13].update();
+        allHoles[7].sumNum(sum);
+    }
+    if (idx == 2) {
+        sum = 1 + allHoles[12].num;
+        allHoles[12].clearNum();
+        allHoles[12].update();
+        allHoles[7].sumNum(sum);
+    }
+    if (idx == 3) {
+        sum = 1 + allHoles[11].num;
+        allHoles[11].clearNum();
+        allHoles[11].update();
+        allHoles[7].sumNum(sum);
+    }
+    if (idx == 4) {
+        sum = 1 + allHoles[10].num;
+        allHoles[10].clearNum();
+        allHoles[10].update();
+        allHoles[7].sumNum(sum);
+    }
+    if (idx == 5) {
+        sum = 1 + allHoles[9].num;
+        allHoles[9].clearNum();
+        allHoles[9].update();
+        allHoles[7].sumNum(sum);
+    }
+    if (idx == 6) {
+        sum = 1 + allHoles[8].num;
+        allHoles[8].clearNum();
+        allHoles[8].update();
+        allHoles[7].sumNum(sum);
+    }
+    allHoles[idx].update();
+    allHoles[7].update();
+    // Enable button
+    for (i = 0; i < button.length; i++) {
+        button[i].disabled = false;
+    }
+}
+
+// My turn
+function myTurn(idx) {
+    var n = allHoles[idx].num;
+    if (n != 0) {
+        hand.myTurnColor();
+        hand.update();
+
+        // Disable button
+        for (i = 0; i < button.length; i++) {
+            button[i].disabled = true;
+        }
+
+        // Set hand
+        hand.clearNum();
+        hand.sumNum(n);
+        hand.update();
+
+        // One turn function here
+        allHoles[idx].clearNum();
+        allHoles[idx].update();
+        i = 1;
+        updateMyNum(idx, i, n);
+        // Function End
+    }
 }
 
 // Update num every 1 sec
-function updateEnemyLoop(idx, i, n) {
-    setTimeout(function () {
+function updateMyNum(idx, i, n) {
+    setTime = setTimeout(function () {
         arrLength = allHoles.length - 1;
         newIdx = idx + i;
+
         // Check if list index is running out
         if (newIdx > arrLength) {
             newIdx = newIdx - arrLength - 1;
         }
-        allHoles[newIdx].addNum();
-        allHoles[newIdx].update();
 
-        i++;
-        if (i <= n) {
-            updateEnemyLoop(idx, i, n);
+        // Check if list index is enemy's bank
+        if (newIdx == 7) {
+            i++;
+            updateMyNum(idx, i, n);
         } else {
-            // Enable button
-            for (i = 0; i < button.length; i++) {
-                button[i].disabled = false;
+            allHoles[newIdx].addNum();
+            allHoles[newIdx].update();
+            dropsound.play();
+
+            i++;
+            if (i <= n) {
+                hand.minNum();
+                hand.update();
+                updateMyNum(idx, i, n);
+            } else {
+                if (allHoles[newIdx].num != 1) {
+                    n = allHoles[newIdx].num + 1;
+                    i = 1;
+                    allHoles[newIdx].clearNum();
+                    allHoles[newIdx].update();
+                    hand.clearNum();
+                    hand.sumNum(n - 1);
+                    hand.update();
+                    updateMyNum(newIdx, i, n);
+                } else {
+                    if (newIdx == 15) {
+                        // Enable button
+                        for (i = 0; i < button.length; i++) {
+                            button[i].disabled = false;
+                        }
+                    } else {
+                        if (newIdx > 7) {
+                            changeMyTurn(newIdx);
+                        } else {
+                            enemyTurn();
+                        }
+                    }
+                }
             }
         }
     }, 1000);
 }
 
-// Enemy's turn
+// Enemy turn
 // will enhanced with AI
 // but for now, we use random
 function enemyTurn() {
     var idx = Math.floor(Math.random() * 7);
     var n = allHoles[idx].num;
+    while (n == 0) {
+        idx = Math.floor(Math.random() * 7);
+        n = allHoles[idx].num;
+    }
+    n = allHoles[idx].num;
+    if (n != 0) {
+        hand.enemyTurnColor();
+        hand.update();
 
-    // Enemy's turn function here
-    allHoles[idx].clearNum();
-    allHoles[idx].update();
-    i = 1;
-    updateEnemyLoop(idx, i, n);
-    // Function End
+        // Set hand
+        hand.clearNum();
+        hand.sumNum(n);
+        hand.update();
 
+        // Enemy's turn function here
+        allHoles[idx].clearNum();
+        allHoles[idx].update();
+        i = 1;
+        updateEnemyNum(idx, i, n);
+        // Function End
+    }
+}
+
+// Update num every 1 sec
+function updateEnemyNum(idx, i, n) {
+    setTime = setTimeout(function () {
+        arrLength = allHoles.length - 1;
+        newIdx = idx + i;
+
+        // Check if list index is running out
+        if (newIdx > arrLength) {
+            newIdx = newIdx - arrLength - 1;
+        }
+
+        // Check if list index is enemy's bank
+        if (newIdx == 15) {
+            i++;
+            updateEnemyNum(idx, i, n);
+        } else {
+            allHoles[newIdx].addNum();
+            allHoles[newIdx].update();
+            dropsound.play();
+
+            i++;
+            if (i <= n) {
+                hand.minNum();
+                hand.update();
+                updateEnemyNum(idx, i, n);
+            } else {
+                if (allHoles[newIdx].num != 1) {
+                    n = allHoles[newIdx].num + 1;
+                    i = 1;
+                    allHoles[newIdx].clearNum();
+                    allHoles[newIdx].update();
+                    hand.clearNum();
+                    hand.sumNum(n - 1);
+                    hand.update();
+                    updateEnemyNum(newIdx, i, n);
+                } else {
+                    if (newIdx == 7) {
+                        // Enable button
+                        for (i = 0; i < button.length; i++) {
+                            button[i].disabled = false;
+                        }
+                    } else {
+                        if (newIdx < 7) {
+                            changeEnemyTurn(newIdx);
+                        } else {
+                            // Enable button
+                            for (i = 0; i < button.length; i++) {
+                                button[i].disabled = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }, 1000);
 }
 
 // Hole component
 function holes(rad, color, x, y, num) {
     this.rad = rad;
+    this.color = color;
     this.x = x;
     this.y = y;
     this.num = num;
     this.oldnum = this.num;
 
-    // Circle shape
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.stroke();
-
     // Add num function
     this.addNum = function () {
         this.num += 1;
+    }
+    // Substract num function
+    this.minNum = function () {
+        this.num -= 1;
     }
     // Clear num function
     this.clearNum = function () {
         this.num = 0;
     }
+    // Sum num
+    this.sumNum = function (n) {
+        this.num += n;
+    }
+
     // Update shape and num
     this.update = function () {
         // Add shape
-        ctx.fillStyle = color;
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
         ctx.fill();
@@ -176,17 +382,30 @@ function holes(rad, color, x, y, num) {
             ctx.fillText(this.num, this.x - 12, this.y + 7);
         }
     }
+    // My turn
+    this.myTurnColor = function () {
+        this.color = "#021f55";
+    }
+    // Enemy's turn
+    this.enemyTurnColor = function () {
+        this.color = "#611414";
+    }
 }
 
 // Function for restart
 function restart() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     allHoles = [];
+    // Enable button
+    for (i = 0; i < button.length; i++) {
+        button[i].disabled = false;
+    }
+    clearTimeout(setTime);
     gameBegin();
 }
 
 // Play function
 function tap(idx) {
     // Play one turn here
-    oneTurn(idx);
+    myTurn(idx);
 }

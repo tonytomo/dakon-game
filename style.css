@@ -26,6 +26,8 @@ body {
 
 canvas {
     border: 1px solid #000000;
+    background-image: url(assets/bg.png);
+    background-size: 100%;
 }
 
 .restartbtn {
@@ -48,7 +50,7 @@ canvas {
     border-radius: 50%;
 }
 .controller > *:hover{
-    background-color: blue;
+    background-color: #021f55;
     color: white;
     cursor: pointer;
 }
