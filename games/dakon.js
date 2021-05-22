@@ -73,10 +73,7 @@ function updateLoop(idx, i, n) {
         if (i <= n) {
             updateLoop(idx, i, n);
         } else {
-            // Enable button
-            for (i = 0; i < button.length; i++) {
-                button[i].disabled = false;
-            }
+            enemyTurn();
         }
     }, 1000);
 }
@@ -95,15 +92,46 @@ function oneTurn(idx) {
     allHoles[idx].update();
     i = 1;
     updateLoop(idx, i, n);
-    // Function end
+    // Function End
+}
+
+// Update num every 1 sec
+function updateEnemyLoop(idx, i, n) {
+    setTimeout(function () {
+        arrLength = allHoles.length - 1;
+        newIdx = idx + i;
+        // Check if list index is running out
+        if (newIdx > arrLength) {
+            newIdx = newIdx - arrLength - 1;
+        }
+        allHoles[newIdx].addNum();
+        allHoles[newIdx].update();
+
+        i++;
+        if (i <= n) {
+            updateEnemyLoop(idx, i, n);
+        } else {
+            // Enable button
+            for (i = 0; i < button.length; i++) {
+                button[i].disabled = false;
+            }
+        }
+    }, 1000);
 }
 
 // Enemy's turn
 // will enhanced with AI
+// but for now, we use random
 function enemyTurn() {
-    var idx;
+    var idx = Math.floor(Math.random() * 7);
+    var n = allHoles[idx].num;
 
     // Enemy's turn function here
+    allHoles[idx].clearNum();
+    allHoles[idx].update();
+    i = 1;
+    updateEnemyLoop(idx, i, n);
+    // Function End
 
 }
 
