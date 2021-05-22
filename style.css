@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #d3d3d3;
+}
+
+.container {
+    position: absolute;
+    margin: auto;
+    padding: 1em;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: max-content;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    margin: 0 auto .5em;
+}
+
+canvas {
+    border: 1px solid #000000;
+}
+
+.controller {
+    background-color: #d1d1d1;
+    padding: 1em;
+    display: flex;
+    gap: 30px;
+}
+.controller > * {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40px;
+    height: 40px;
+    font-size: 15pt;
+    transition-duration: 200ms;
+    border-radius: 50%;
+}
+.controller > *:hover{
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}

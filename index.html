@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dakon</title>
+
+    <!-- Web Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="init()">
+    <div class="container">
+        <h1 class="title">Dakon kuy</h1>
+
+        <!-- Game Area -->
+        <canvas id="myCanvas" width="500" height="200">
+            <p>Canvas is not supported</p>
+        </canvas>
+
+        <!-- Controller -->
+        <div class="controller">
+            <button onmousedown="tap(14)">1</button>
+            <button onmousedown="tap(13)">2</button>
+            <button onmousedown="tap(12)">3</button>
+            <button onmousedown="tap(11)">4</button>
+            <button onmousedown="tap(10)">5</button>
+            <button onmousedown="tap(9)">6</button>
+            <button onmousedown="tap(8)">7</button>
+        </div>
+    </div>
+    <script src="games/dakon.js"></script>
+</body>
+</html>
