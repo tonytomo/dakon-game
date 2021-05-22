@@ -1,6 +1,10 @@
 var canvas;
 var ctx;
 var i;
+var myVar;
+var arrLength;
+var newIdx;
+const button = document.querySelectorAll(".btn");
 
 // Holes identifier
 // allHoles[7] and allHoles[15] is the Bank Hole
@@ -34,14 +38,14 @@ function gameBegin() {
                 yh = 100;
                 allHoles.push(new holes(radb, "red", xh, yh, 0));
                 allHoles[i].update();
-                xh = 100;
+                xh = 400;
                 yh = 150;
             }
         } else {
             if (i != 15) {
                 allHoles.push(new holes(rads, "blue", xh, yh, 7));
                 allHoles[i].update();
-                xh += 50;
+                xh -= 50;
             } else {
                 // Hole [15] is the our Bank hole
                 xh = 50;
@@ -53,29 +57,54 @@ function gameBegin() {
     }
 }
 
-// Update Area
-function updateArea(idx) {
-    // What happend every interval 20
-    allHoles[idx].update();
+// Update num every 1 sec
+function updateLoop(idx, i, n) {
+    setTimeout(function () {
+        arrLength = allHoles.length - 1;
+        newIdx = idx + i;
+        // Check if list index is running out
+        if (newIdx > arrLength) {
+            newIdx = newIdx - arrLength - 1;
+        }
+        allHoles[newIdx].addNum();
+        allHoles[newIdx].update();
+
+        i++;
+        if (i <= n) {
+            updateLoop(idx, i, n);
+        } else {
+            // Enable button
+            for (i = 0; i < button.length; i++) {
+                button[i].disabled = false;
+            }
+        }
+    }, 1000);
 }
 
 // One turn
 function oneTurn(idx) {
+    var n = allHoles[idx].num;
+
+    // Disable button
+    for (i = 0; i < button.length; i++) {
+        button[i].disabled = true;
+    }
+
     // One turn function here
-    setInterval(updateArea(idx), 20);
+    allHoles[idx].clearNum();
+    allHoles[idx].update();
+    i = 1;
+    updateLoop(idx, i, n);
+    // Function end
 }
 
 // Enemy's turn
-// enhanced with AI
-function enemyTurn(idx) {
-    const button = document.querySelectorAll("button");
-    button.disabled = true;
+// will enhanced with AI
+function enemyTurn() {
+    var idx;
 
     // Enemy's turn function here
 
-    setInterval(updateArea(idx), 20);
-
-    button.disabled = false;
 }
 
 // Hole component
@@ -132,7 +161,4 @@ function restart() {
 function tap(idx) {
     // Play one turn here
     oneTurn(idx);
-    enemyTurn();
-    // allHoles[idx].addNum();
-    // allHoles[idx].update();
 }
