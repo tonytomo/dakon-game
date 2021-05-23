@@ -33,6 +33,9 @@ canvas {
 .restartbtn {
     display: block;
 }
+.stopbtn {
+    display: block;
+}
 
 .controller {
     background-color: #d1d1d1;

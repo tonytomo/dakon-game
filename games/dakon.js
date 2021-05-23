@@ -212,7 +212,7 @@ function updateMyNum(idx, i, n) {
         // Check if list index is enemy's bank
         if (newIdx == 7) {
             i++;
-            updateMyNum(idx, i, n);
+            updateMyNum(idx, i, n + 1);
         } else {
             allHoles[newIdx].addNum();
             allHoles[newIdx].update();
@@ -224,21 +224,21 @@ function updateMyNum(idx, i, n) {
                 hand.update();
                 updateMyNum(idx, i, n);
             } else {
-                if (allHoles[newIdx].num != 1) {
-                    n = allHoles[newIdx].num + 1;
-                    i = 1;
-                    allHoles[newIdx].clearNum();
-                    allHoles[newIdx].update();
-                    hand.clearNum();
-                    hand.sumNum(n - 1);
-                    hand.update();
-                    updateMyNum(newIdx, i, n);
+                if (newIdx == 15) {
+                    // Enable button
+                    for (i = 0; i < button.length; i++) {
+                        button[i].disabled = false;
+                    }
                 } else {
-                    if (newIdx == 15) {
-                        // Enable button
-                        for (i = 0; i < button.length; i++) {
-                            button[i].disabled = false;
-                        }
+                    if (allHoles[newIdx].num > 1) {
+                        n = allHoles[newIdx].num;
+                        i = 1;
+                        allHoles[newIdx].clearNum();
+                        allHoles[newIdx].update();
+                        hand.clearNum();
+                        hand.sumNum(n);
+                        hand.update();
+                        updateMyNum(newIdx, i, n);
                     } else {
                         if (newIdx > 7) {
                             changeMyTurn(newIdx);
@@ -262,7 +262,6 @@ function enemyTurn() {
         idx = Math.floor(Math.random() * 7);
         n = allHoles[idx].num;
     }
-    n = allHoles[idx].num;
     if (n != 0) {
         hand.enemyTurnColor();
         hand.update();
@@ -295,7 +294,7 @@ function updateEnemyNum(idx, i, n) {
         // Check if list index is enemy's bank
         if (newIdx == 15) {
             i++;
-            updateEnemyNum(idx, i, n);
+            updateEnemyNum(idx, i, n + 1);
         } else {
             allHoles[newIdx].addNum();
             allHoles[newIdx].update();
@@ -307,21 +306,18 @@ function updateEnemyNum(idx, i, n) {
                 hand.update();
                 updateEnemyNum(idx, i, n);
             } else {
-                if (allHoles[newIdx].num != 1) {
-                    n = allHoles[newIdx].num + 1;
-                    i = 1;
-                    allHoles[newIdx].clearNum();
-                    allHoles[newIdx].update();
-                    hand.clearNum();
-                    hand.sumNum(n - 1);
-                    hand.update();
-                    updateEnemyNum(newIdx, i, n);
+                if (newIdx == 7) {
+                    enemyTurn();
                 } else {
-                    if (newIdx == 7) {
-                        // Enable button
-                        for (i = 0; i < button.length; i++) {
-                            button[i].disabled = false;
-                        }
+                    if (allHoles[newIdx].num > 1) {
+                        n = allHoles[newIdx].num;
+                        i = 1;
+                        allHoles[newIdx].clearNum();
+                        allHoles[newIdx].update();
+                        hand.clearNum();
+                        hand.sumNum(n);
+                        hand.update();
+                        updateEnemyNum(newIdx, i, n);
                     } else {
                         if (newIdx < 7) {
                             changeEnemyTurn(newIdx);
@@ -390,6 +386,11 @@ function holes(rad, color, x, y, num) {
     this.enemyTurnColor = function () {
         this.color = "#611414";
     }
+}
+
+// Stop function
+function stop() {
+    clearTimeout(setTime);
 }
 
 // Function for restart
