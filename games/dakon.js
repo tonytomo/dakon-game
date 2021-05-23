@@ -249,7 +249,7 @@ function updateMyNum(idx, i, n) {
                 }
             }
         }
-    }, 1000);
+    }, 500);
 }
 
 // Enemy turn
@@ -331,7 +331,7 @@ function updateEnemyNum(idx, i, n) {
                 }
             }
         }
-    }, 1000);
+    }, 500);
 }
 
 // Hole component
