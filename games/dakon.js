@@ -178,7 +178,18 @@ function changeEnemyTurn(idx) {
 // My turn
 function myTurn(idx) {
     var n = allHoles[idx].num;
-    if (n != 0) {
+
+    // Number of my kecik
+    var sum = 0;
+    for (i = 8; i <= 14; i++) {
+        sum += allHoles[i].num;
+    }
+
+    // Check if all of my lumbung is empty
+    if (sum == 0) {
+        endCondition();
+    }
+    else if (n != 0) {
         hand.myColor();
         hand.update();
 
@@ -296,7 +307,18 @@ function enemyTurn() {
         idx = Math.floor(Math.random() * 7);
         n = allHoles[idx].num;
     }
-    if (n != 0) {
+
+    // Number of enemy kecik
+    var sum = 0;
+    for (i = 0; i <= 6; i++) {
+        sum += allHoles[i].num;
+    }
+
+    // Check if all of enemy lumbung is empty
+    if (sum == 0) {
+        endCondition();
+    }
+    else if (n != 0) {
         hand.enemyColor();
         hand.update();
 
@@ -399,6 +421,51 @@ function updateEnemyNum(idx, i, n, timer) {
     }, timer);
 }
 
+// END CONDITION
+function endCondition() {
+
+    // All of the remain kecik go to their bank
+    var sum1 = 0;
+    for (i = 8; i <= 14; i++) {
+        sum1 += allHoles[i].num;
+    }
+    allHoles[15].sumNum(sum1);
+
+    var sum2 = 0;
+    for (i = 0; i <= 6; i++) {
+        sum2 += allHoles[i].num;
+    }
+    allHoles[7].sumNum(sum2);
+
+    // WIN-LOSE CONDITION
+    if (allHoles[15].num == allHoles[7].num) {
+        // TIE condition
+        var end = new holes(60, "#414141", 250, 100, "TIE");
+        end.showEnd();
+        // Disable button
+        for (i = 0; i < button.length; i++) {
+            button[i].disabled = true;
+        }
+    }
+    else if (allHoles[15].num > allHoles[7].num) {
+        // WIN condition
+        var end = new holes(60, "#021f55", 250, 100, "YOU WIN");
+        end.showEnd();
+        // Disable button
+        for (i = 0; i < button.length; i++) {
+            button[i].disabled = true;
+        }
+    } else {
+        // LOSE condition
+        var end = new holes(60, "#611414", 250, 100, "YOU LOSE");
+        end.showEnd();
+        // Disable button
+        for (i = 0; i < button.length; i++) {
+            button[i].disabled = true;
+        }
+    }
+}
+
 // Hole component
 function holes(rad, color, x, y, num) {
     this.rad = rad;
@@ -443,6 +510,29 @@ function holes(rad, color, x, y, num) {
             ctx.fillText(this.num, this.x - 12, this.y + 7);
         }
     }
+    // Show end condition
+    this.showEnd = function() {
+        // Add shape
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+
+        // Add new text
+        ctx.fillStyle = "white";
+        ctx.font = "20px Arial";
+        if (this.num == "TIE") {
+            ctx.fillText(this.num, this.x - 15, this.y + 7);
+        } 
+        else if (this.num == "YOU WIN") {
+            ctx.fillText(this.num, this.x - 45, this.y + 7);
+        } 
+        else if (this.num == "YOU LOSE") {
+            ctx.fillText(this.num, this.x - 52, this.y + 7);
+        }
+    }
+
     // My turn
     this.myColor = function () {
         this.color = "#021f55";
