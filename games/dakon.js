@@ -35,34 +35,34 @@ function gameBegin() {
     var yh = 50;
 
     // Add Turn hand
-    hand = new holes(rads, "#414141", 25, 25, 0);
+    hand = new holes(rads*2, "#414141", 25*2, 25*2, 0);
     hand.update();
 
     // Creating holes
     for (i = 0; i < 16; i++) {
         if (i < 8) {
             if (i != 7) {
-                allHoles.push(new holes(rads, "#611414", xh, yh, 7));
+                allHoles.push(new holes(rads*2, "#611414", xh*2, yh*2, 7));
                 allHoles[i].update();
                 xh += 50;
             } else {
                 // Hole [7] is the enemy Bank hole
                 yh = 100;
-                allHoles.push(new holes(radb, "#611414", xh, yh, 0));
+                allHoles.push(new holes(radb*2, "#611414", xh*2, yh*2, 0));
                 allHoles[i].update();
                 xh = 400;
                 yh = 150;
             }
         } else {
             if (i != 15) {
-                allHoles.push(new holes(rads, "#021f55", xh, yh, 7));
+                allHoles.push(new holes(rads*2, "#021f55", xh*2, yh*2, 7));
                 allHoles[i].update();
                 xh -= 50;
             } else {
                 // Hole [15] is the our Bank hole
                 xh = 50;
                 yh = 100;
-                allHoles.push(new holes(radb, "#021f55", xh, yh, 0));
+                allHoles.push(new holes(radb*2, "#021f55", xh*2, yh*2, 0));
                 allHoles[i].update();
             }
         }
@@ -303,10 +303,6 @@ function updateMyNum(idx, i, n, timer) {
 function enemyTurn() {
     var idx = Math.floor(Math.random() * 7);
     var n = allHoles[idx].num;
-    while (n == 0) {
-        idx = Math.floor(Math.random() * 7);
-        n = allHoles[idx].num;
-    }
 
     // Number of enemy kecik
     var sum = 0;
@@ -317,22 +313,27 @@ function enemyTurn() {
     // Check if all of enemy lumbung is empty
     if (sum == 0) {
         endCondition();
-    }
-    else if (n != 0) {
-        hand.enemyColor();
-        hand.update();
+    } else {
+        while (n == 0) {
+            idx = Math.floor(Math.random() * 7);
+            n = allHoles[idx].num;
+        }
+        if (n != 0) {
+            hand.enemyColor();
+            hand.update();
 
-        // Set hand
-        hand.clearNum();
-        hand.sumNum(n);
-        hand.update();
+            // Set hand
+            hand.clearNum();
+            hand.sumNum(n);
+            hand.update();
 
-        // Enemy's turn function here
-        allHoles[idx].clearNum();
-        allHoles[idx].update();
-        i = 1;
-        updateEnemyNum(idx, i, n, time500);
-        // Function End
+            // Enemy's turn function here
+            allHoles[idx].clearNum();
+            allHoles[idx].update();
+            i = 1;
+            updateEnemyNum(idx, i, n, time500);
+            // Function End
+        }
     }
 }
 
@@ -426,21 +427,25 @@ function endCondition() {
 
     // All of the remain kecik go to their bank
     var sum1 = 0;
-    for (i = 8; i <= 14; i++) {
-        sum1 += allHoles[i].num;
-    }
-    allHoles[15].sumNum(sum1);
-
     var sum2 = 0;
     for (i = 0; i <= 6; i++) {
+        sum1 += allHoles[i + 8].num;
+        allHoles[i + 8].clearNum();
+        allHoles[i + 8].update();
+        
         sum2 += allHoles[i].num;
+        allHoles[i].clearNum();
+        allHoles[i].update();
     }
+    allHoles[15].sumNum(sum1);
+    allHoles[15].update();
     allHoles[7].sumNum(sum2);
+    allHoles[7].update();
 
     // WIN-LOSE CONDITION
     if (allHoles[15].num == allHoles[7].num) {
         // TIE condition
-        var end = new holes(60, "#414141", 250, 100, "TIE");
+        var end = new holes(60*2, "#414141", 250*2, 100*2, "TIE");
         end.showEnd();
         // Disable button
         for (i = 0; i < button.length; i++) {
@@ -449,7 +454,7 @@ function endCondition() {
     }
     else if (allHoles[15].num > allHoles[7].num) {
         // WIN condition
-        var end = new holes(60, "#021f55", 250, 100, "YOU WIN");
+        var end = new holes(60*2, "#021f55", 250*2, 100*2, "YOU WIN");
         end.showEnd();
         // Disable button
         for (i = 0; i < button.length; i++) {
@@ -457,7 +462,7 @@ function endCondition() {
         }
     } else {
         // LOSE condition
-        var end = new holes(60, "#611414", 250, 100, "YOU LOSE");
+        var end = new holes(60*2, "#611414", 250*2, 100*2, "YOU LOSE");
         end.showEnd();
         // Disable button
         for (i = 0; i < button.length; i++) {
@@ -503,15 +508,15 @@ function holes(rad, color, x, y, num) {
 
         // Add new text
         ctx.fillStyle = "white";
-        ctx.font = "20px Arial";
+        ctx.font = "40px Arial";
         if (this.num < 10) {
-            ctx.fillText(this.num, this.x - 5, this.y + 7);
+            ctx.fillText(this.num, this.x - 10, this.y + 14);
         } else {
-            ctx.fillText(this.num, this.x - 12, this.y + 7);
+            ctx.fillText(this.num, this.x - 24, this.y + 14);
         }
     }
     // Show end condition
-    this.showEnd = function() {
+    this.showEnd = function () {
         // Add shape
         ctx.fillStyle = this.color;
         ctx.beginPath();
@@ -521,15 +526,15 @@ function holes(rad, color, x, y, num) {
 
         // Add new text
         ctx.fillStyle = "white";
-        ctx.font = "20px Arial";
+        ctx.font = "40px Arial";
         if (this.num == "TIE") {
-            ctx.fillText(this.num, this.x - 15, this.y + 7);
-        } 
+            ctx.fillText(this.num, this.x - 30, this.y + 14);
+        }
         else if (this.num == "YOU WIN") {
-            ctx.fillText(this.num, this.x - 45, this.y + 7);
-        } 
+            ctx.fillText(this.num, this.x - 90, this.y + 14);
+        }
         else if (this.num == "YOU LOSE") {
-            ctx.fillText(this.num, this.x - 52, this.y + 7);
+            ctx.fillText(this.num, this.x - 104, this.y + 14);
         }
     }
 

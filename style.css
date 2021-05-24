@@ -30,22 +30,15 @@ canvas {
     background-size: 100%;
 }
 
-.restartbtn {
-    display: block;
-}
-.stopbtn {
-    display: block;
-}
-
 .controller {
     background-color: #d1d1d1;
     padding: 1em;
     display: flex;
-    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
 }
 .controller > * {
-    margin-left: auto;
-    margin-right: auto;
     width: 40px;
     height: 40px;
     font-size: 15pt;
@@ -56,4 +49,13 @@ canvas {
     background-color: #021f55;
     color: white;
     cursor: pointer;
+}
+
+.restartbtn {
+    display: block;
+    margin: 0 auto;
+}
+.stopbtn {
+    display: block;
+    margin: .5em auto;
 }

@@ -14,26 +14,27 @@
         <h1 class="title">Dakon kuy</h1>
 
         <!-- Game Area -->
-        <canvas id="myCanvas" width="500" height="200">
+        <canvas id="myCanvas" width="1000" height="400">
             <p>Canvas is not supported</p>
         </canvas>
 
-        <!-- Restart -->
-        <button onmousedown="restart()" class="restartbtn">RESTART</button>
+        <!-- Controller -->
+        <div class="controller">
+            <button onmousedown="tap(14)" class="btn">^</button>
+            <button onmousedown="tap(13)" class="btn">^</button>
+            <button onmousedown="tap(12)" class="btn">^</button>
+            <button onmousedown="tap(11)" class="btn">^</button>
+            <button onmousedown="tap(10)" class="btn">^</button>
+            <button onmousedown="tap(9)" class="btn">^</button>
+            <button onmousedown="tap(8)" class="btn">^</button>
+        </div>
 
         <!-- Stop -->
         <button onmousedown="stop()" class="stopbtn">STOP</button>
 
-        <!-- Controller -->
-        <div class="controller">
-            <button onmousedown="tap(14)" class="btn">1</button>
-            <button onmousedown="tap(13)" class="btn">2</button>
-            <button onmousedown="tap(12)" class="btn">3</button>
-            <button onmousedown="tap(11)" class="btn">4</button>
-            <button onmousedown="tap(10)" class="btn">5</button>
-            <button onmousedown="tap(9)" class="btn">6</button>
-            <button onmousedown="tap(8)" class="btn">7</button>
-        </div>
+        <!-- Restart -->
+        <button onmousedown="restart()" class="restartbtn">RESTART</button>
+
     </div>
     <script src="games/dakon.js"></script>
 </body>
