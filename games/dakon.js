@@ -6,6 +6,9 @@ var arrLength;
 var newIdx;
 var hand;
 
+// Time
+var time500 = 500;
+var time0 = 0;
 var setTime;
 
 var dropsound = new Audio('assets/3224__edwin-p-manchester__04.wav')
@@ -176,7 +179,7 @@ function changeEnemyTurn(idx) {
 function myTurn(idx) {
     var n = allHoles[idx].num;
     if (n != 0) {
-        hand.myTurnColor();
+        hand.myColor();
         hand.update();
 
         // Disable button
@@ -193,13 +196,14 @@ function myTurn(idx) {
         allHoles[idx].clearNum();
         allHoles[idx].update();
         i = 1;
-        updateMyNum(idx, i, n);
+        updateMyNum(idx, i, n, time500);
         // Function End
     }
 }
 
 // Update num every 1 sec
-function updateMyNum(idx, i, n) {
+function updateMyNum(idx, i, n, timer) {
+    //Set Timeout every 1 sec
     setTime = setTimeout(function () {
         arrLength = allHoles.length - 1;
         newIdx = idx + i;
@@ -212,8 +216,32 @@ function updateMyNum(idx, i, n) {
         // Check if list index is enemy's bank
         if (newIdx == 7) {
             i++;
-            updateMyNum(idx, i, n + 1);
+            updateMyNum(idx, i, n + 1, time0);
         } else {
+            // Change active hole color
+            if (newIdx > 7) {
+                if (newIdx != 8) {
+                    allHoles[newIdx - 1].myColor();
+                    allHoles[newIdx - 1].update();
+                } else {
+                    allHoles[newIdx - 2].enemyColor();
+                    allHoles[newIdx - 2].update();
+                }
+                allHoles[newIdx].myActiveColor();
+                allHoles[newIdx].update();
+            } else {
+                if (newIdx != 0) {
+                    allHoles[newIdx - 1].enemyColor();
+                    allHoles[newIdx - 1].update();
+                } else {
+                    allHoles[15].myColor();
+                    allHoles[15].update();
+                }
+                allHoles[newIdx].enemyActiveColor();
+                allHoles[newIdx].update();
+            }
+
+            // Add num to hole
             allHoles[newIdx].addNum();
             allHoles[newIdx].update();
             dropsound.play();
@@ -222,9 +250,11 @@ function updateMyNum(idx, i, n) {
             if (i <= n) {
                 hand.minNum();
                 hand.update();
-                updateMyNum(idx, i, n);
+                updateMyNum(idx, i, n, time500);
             } else {
                 if (newIdx == 15) {
+                    allHoles[newIdx].myColor();
+                    allHoles[newIdx].update();
                     // Enable button
                     for (i = 0; i < button.length; i++) {
                         button[i].disabled = false;
@@ -238,18 +268,22 @@ function updateMyNum(idx, i, n) {
                         hand.clearNum();
                         hand.sumNum(n);
                         hand.update();
-                        updateMyNum(newIdx, i, n);
+                        updateMyNum(newIdx, i, n, time500);
                     } else {
                         if (newIdx > 7) {
+                            allHoles[newIdx].myColor();
+                            allHoles[newIdx].update();
                             changeMyTurn(newIdx);
                         } else {
+                            allHoles[newIdx].enemyColor();
+                            allHoles[newIdx].update();
                             enemyTurn();
                         }
                     }
                 }
             }
         }
-    }, 500);
+    }, timer);
 }
 
 // Enemy turn
@@ -263,7 +297,7 @@ function enemyTurn() {
         n = allHoles[idx].num;
     }
     if (n != 0) {
-        hand.enemyTurnColor();
+        hand.enemyColor();
         hand.update();
 
         // Set hand
@@ -275,13 +309,14 @@ function enemyTurn() {
         allHoles[idx].clearNum();
         allHoles[idx].update();
         i = 1;
-        updateEnemyNum(idx, i, n);
+        updateEnemyNum(idx, i, n, time500);
         // Function End
     }
 }
 
 // Update num every 1 sec
-function updateEnemyNum(idx, i, n) {
+function updateEnemyNum(idx, i, n, timer) {
+    //Set Timeout every 1 sec
     setTime = setTimeout(function () {
         arrLength = allHoles.length - 1;
         newIdx = idx + i;
@@ -294,8 +329,32 @@ function updateEnemyNum(idx, i, n) {
         // Check if list index is enemy's bank
         if (newIdx == 15) {
             i++;
-            updateEnemyNum(idx, i, n + 1);
+            updateEnemyNum(idx, i, n + 1, time0);
         } else {
+            // Change active hole color
+            if (newIdx > 7) {
+                if (newIdx != 8) {
+                    allHoles[newIdx - 1].myColor();
+                    allHoles[newIdx - 1].update();
+                } else {
+                    allHoles[7].enemyColor();
+                    allHoles[7].update();
+                }
+                allHoles[newIdx].myActiveColor();
+                allHoles[newIdx].update();
+            } else {
+                if (newIdx != 0) {
+                    allHoles[newIdx - 1].enemyColor();
+                    allHoles[newIdx - 1].update();
+                } else {
+                    allHoles[14].myColor();
+                    allHoles[14].update();
+                }
+                allHoles[newIdx].enemyActiveColor();
+                allHoles[newIdx].update();
+            }
+
+            // Add num to hole
             allHoles[newIdx].addNum();
             allHoles[newIdx].update();
             dropsound.play();
@@ -304,9 +363,11 @@ function updateEnemyNum(idx, i, n) {
             if (i <= n) {
                 hand.minNum();
                 hand.update();
-                updateEnemyNum(idx, i, n);
+                updateEnemyNum(idx, i, n, time500);
             } else {
                 if (newIdx == 7) {
+                    allHoles[newIdx].enemyColor();
+                    allHoles[newIdx].update();
                     enemyTurn();
                 } else {
                     if (allHoles[newIdx].num > 1) {
@@ -317,11 +378,15 @@ function updateEnemyNum(idx, i, n) {
                         hand.clearNum();
                         hand.sumNum(n);
                         hand.update();
-                        updateEnemyNum(newIdx, i, n);
+                        updateEnemyNum(newIdx, i, n, time500);
                     } else {
                         if (newIdx < 7) {
+                            allHoles[newIdx].enemyColor();
+                            allHoles[newIdx].update();
                             changeEnemyTurn(newIdx);
                         } else {
+                            allHoles[newIdx].myColor();
+                            allHoles[newIdx].update();
                             // Enable button
                             for (i = 0; i < button.length; i++) {
                                 button[i].disabled = false;
@@ -331,7 +396,7 @@ function updateEnemyNum(idx, i, n) {
                 }
             }
         }
-    }, 500);
+    }, timer);
 }
 
 // Hole component
@@ -379,12 +444,20 @@ function holes(rad, color, x, y, num) {
         }
     }
     // My turn
-    this.myTurnColor = function () {
+    this.myColor = function () {
         this.color = "#021f55";
     }
     // Enemy's turn
-    this.enemyTurnColor = function () {
+    this.enemyColor = function () {
         this.color = "#611414";
+    }
+    // My turn active
+    this.myActiveColor = function () {
+        this.color = "#1e4388";
+    }
+    // Enemy's turn active
+    this.enemyActiveColor = function () {
+        this.color = "#921f1f";
     }
 }
 
