@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,33 +10,53 @@
     <!-- Web Style -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body onload="init()">
     <div class="container">
         <h1 class="title">Dakon kuy</h1>
 
-        <!-- Game Area -->
-        <canvas id="myCanvas" width="1000" height="400">
-            <p>Canvas is not supported</p>
-        </canvas>
+        <div class="gameArea">
+            <!-- Controller PLAYER 2 -->
+            <div class="controller player-2">
+                <button onmousedown="tap1(0)" class="btn1"></button>
+                <button onmousedown="tap1(1)" class="btn1"></button>
+                <button onmousedown="tap1(2)" class="btn1"></button>
+                <button onmousedown="tap1(3)" class="btn1"></button>
+                <button onmousedown="tap1(4)" class="btn1"></button>
+                <button onmousedown="tap1(5)" class="btn1"></button>
+                <button onmousedown="tap1(6)" class="btn1"></button>
+            </div>
 
-        <!-- Controller -->
-        <div class="controller">
-            <button onmousedown="tap(14)" class="btn">^</button>
-            <button onmousedown="tap(13)" class="btn">^</button>
-            <button onmousedown="tap(12)" class="btn">^</button>
-            <button onmousedown="tap(11)" class="btn">^</button>
-            <button onmousedown="tap(10)" class="btn">^</button>
-            <button onmousedown="tap(9)" class="btn">^</button>
-            <button onmousedown="tap(8)" class="btn">^</button>
+            <!-- Game Area -->
+            <canvas id="myCanvas" width="1000" height="400">
+                <p>Canvas is not supported</p>
+            </canvas>
+
+            <!-- Controller PLAYER 1 -->
+            <div class="controller player-1">
+                <button onmousedown="tap(14)" class="btn"></button>
+                <button onmousedown="tap(13)" class="btn"></button>
+                <button onmousedown="tap(12)" class="btn"></button>
+                <button onmousedown="tap(11)" class="btn"></button>
+                <button onmousedown="tap(10)" class="btn"></button>
+                <button onmousedown="tap(9)" class="btn"></button>
+                <button onmousedown="tap(8)" class="btn"></button>
+            </div>
         </div>
 
-        <!-- Stop -->
-        <button onmousedown="stop()" class="stopbtn">STOP</button>
+        <div class="gamecontrol">
+            <!-- Restart -->
+            <button onmousedown="restart()" class="restartbtn">RESTART</button>
 
-        <!-- Restart -->
-        <button onmousedown="restart()" class="restartbtn">RESTART</button>
-
+            <!-- PvP button -->
+            <button onmousedown="pvpOn()" class="pvpbtn" id="pvpbtn">PvP OFF</button>
+        </div>
     </div>
     <script src="games/dakon.js"></script>
+    <script src="games/dakonFun.js"></script>
+    <script src="games/enemyBot.js"></script>
+    <script src="games/enemyPlayer.js"></script>
+    <script src="games/myPlayer.js"></script>
 </body>
+
 </html>

@@ -24,6 +24,10 @@ body {
     margin: 0 auto .5em;
 }
 
+.gameArea {
+    position: relative;
+}
+
 canvas {
     border: 1px solid #000000;
     background-image: url(assets/bg2.png);
@@ -31,31 +35,74 @@ canvas {
 }
 
 .controller {
-    background-color: #d1d1d1;
+    position: absolute;
     padding: 1em;
+
+    left: 50%;
+    transform: translateX(-50%);
+
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 60px;
+    gap: 20px;
 }
 .controller > * {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     font-size: 15pt;
+    border: none;
+    outline: none;
     transition-duration: 200ms;
     border-radius: 50%;
-}
-.controller > *:hover{
-    background-color: #021f55;
-    color: white;
+    background-color: rgba(255, 255, 255, 0);
     cursor: pointer;
 }
 
-.restartbtn {
-    display: block;
-    margin: 0 auto;
+.controller > *:hover:enabled {
+    background-color: rgba(255, 255, 255, 0.3);
 }
-.stopbtn {
-    display: block;
+.controller > *:hover:disabled {
+    cursor: default;
+}
+
+.player-1 {
+    bottom: 12%;
+}
+
+.player-2 {
+    top: 11.2%;
+}
+
+.gamecontrol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pvpbtn {
+    color: white;
+    background-color: #353535;
+    border: none;
+    outline: none;
     margin: .5em auto;
+    padding: 1em 1.5em;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+.pvpbtn:hover {
+    opacity: 0.8;
+}
+
+.restartbtn {
+    color: white;
+    background-color: #611414;
+    border: none;
+    outline: none;
+    margin: .5em auto;
+    padding: 1em 1.5em;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+.restartbtn:hover {
+    opacity: 0.8;
 }
