@@ -5,6 +5,7 @@ var myVar;
 var arrLength;
 var newIdx;
 var hand;       // Biji yang ada di tangan
+var bijiAwal = 5; // Biji awal di setiap lubang
 
 var timeStep = 1000;    // Waktu yg dibutuhkan setiap langkah
 var time0 = 0;          // Waktu untuk melewati bank lawan
@@ -46,7 +47,7 @@ function gameBegin() {
         if (i < 8) {
             if (i != 7) {
                 // Lubang kecil MUSUH idx 0-6
-                holes.push(new Hole(rads*2, "#611414", xh*2, yh*2, 7));
+                holes.push(new Hole(rads*2, "#611414", xh*2, yh*2, bijiAwal));
                 holes[i].update();
                 xh += 50;
             } else {
@@ -60,7 +61,7 @@ function gameBegin() {
         } else {
             if (i != 15) {
                 // Lubang kecil PLAYER idx 8-14
-                holes.push(new Hole(rads*2, "#021f55", xh*2, yh*2, 7));
+                holes.push(new Hole(rads*2, "#021f55", xh*2, yh*2, bijiAwal));
                 holes[i].update();
                 xh -= 50;
             } else {
