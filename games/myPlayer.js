@@ -57,6 +57,10 @@ function changeMyTurn(idx) {
     holes[idx].update();    // update lubang PLAYER
     holes[15].update();     // update bank PLAYER
 
+    hand.clearNum();    // Biji sudah habis
+    hand.enemyColor();  // Ganti warna
+    hand.update();      // update tangan
+
     // GANTI GILIRAN
     // Flag lawan player atau bot
     if (pvpflag == 1) {
@@ -171,7 +175,11 @@ function updateMyNum(idx, i, n, timer) {
             // Meletakan biji ke lubang yang dilalui
             holes[newIdx].addNum(); // Menambah 1 biji
             holes[newIdx].update(); // update lubang
-            dropsound.play();       // menyalakan sound meletakan
+
+            // Stop sound lalu menyalakan lagi
+            dropsound.pause();
+            dropsound.currentTime = 0;
+            dropsound.play();
 
             i++;    // Menambah iterasi setelah meletakan biji
 
@@ -226,6 +234,11 @@ function updateMyNum(idx, i, n, timer) {
                         else {
                             holes[newIdx].enemyColor();
                             holes[newIdx].update();
+
+                            hand.clearNum();    // Biji sudah habis
+                            hand.enemyColor();  // Ganti warna
+                            hand.update();      // update tangan
+
                             // GANTI GILIRAN
                             // Flag lawan player atau bot
                             if (pvpflag == 1) {

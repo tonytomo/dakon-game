@@ -47,6 +47,10 @@ function changeEnemyPTurn(idx) {
     holes[idx].update();
     holes[7].update();
 
+    hand.clearNum();    // Biji sudah habis
+    hand.myColor();     // Ganti warna
+    hand.update();      // update tangan
+
     // Tombol controller enable, GILIRAN PLAYER 1
     // Tombol controller PLAYER 2 disable
     for (i = 0; i < button.length; i++) {
@@ -75,7 +79,7 @@ function enemyPTurn(idx) {
     }
     // Jika lubang tidak kosong
     else if (n != 0) {
-        
+
         // Disable tombol controller
         for (i = 0; i < button.length; i++) {
             button[i].disabled = true;
@@ -154,6 +158,10 @@ function updateEnemyPNum(idx, i, n, timer) {
             // Meletakan biji ke lubang yang dilewati
             holes[newIdx].addNum();
             holes[newIdx].update();
+
+            // Stop sound lalu menyalakan lagi
+            dropsound.pause();
+            dropsound.currentTime = 0;
             dropsound.play();
 
             i++;
@@ -184,6 +192,10 @@ function updateEnemyPNum(idx, i, n, timer) {
                         } else {
                             holes[newIdx].myColor();
                             holes[newIdx].update();
+
+                            hand.clearNum();    // Biji sudah habis
+                            hand.myColor();     // Ganti warna
+                            hand.update();      // update tangan
 
                             // Enable tombol kontrol
                             // GILIRAN PLAYER
