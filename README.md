@@ -16,8 +16,8 @@ Pada awal permainan setiap lubang kecil diisi dengan tujuh buah biji. Dua orang 
 
 Permainan dianggap selesai bila sudah tidak ada biji lagi yang dapat diambil (seluruh biji ada di lubang besar kedua pemain). Pemenangnya adalah yang mendapatkan biji terbanyak.
 
-Ya begitu, btw ini lawan/bot nya ngerandom.
+## Fitur
 
-## PROGRESS (100%)
+__BISA MAEN PvP__ atau kalau gaada teman, maen sendiri __vsBOT__ juga bisa. BOT masih mengambil biji secara random.
 
-Silahkan bermain. kalo ada bug bilang..
+__Silahkan bermain. kalo ada bug bilang..__
