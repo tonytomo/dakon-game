@@ -5,11 +5,12 @@ var myVar;
 var arrLength;
 var newIdx;
 var hand;       // Biji yang ada di tangan
+
 var pvpflag = 0; // Flag untuk Player vs player
 
-var bijiAwal = 7; // Biji awal di setiap lubang
+var bijiAwal = 5; // Biji awal di setiap lubang
 
-var timeStep = 500;    // Waktu yg dibutuhkan setiap langkah
+var timeStep = 600;    // Waktu yg dibutuhkan setiap langkah
 var time0 = 0;          // Waktu untuk melewati bank lawan
 var setTime;            // Timeout kontroler
 
@@ -32,6 +33,7 @@ function init() {
     canvas = document.getElementById("myCanvas");
     ctx = canvas.getContext('2d');  // Membuat context/elemen yang akan ditampilkan dalam canvas
 
+    // Game dimulai
     gameBegin();
 }
 
@@ -50,14 +52,15 @@ function gameBegin() {
     // Tambah komponen lubang kecil dan besar
     for (i = 0; i < 16; i++) {
         if (i < 8) {
-            if (i != 7) {
+            if (i != 7) { 
                 // Lubang kecil MUSUH idx 0-6
                 holes.push(new Hole(rads * 2, "#611414", xh * 2, yh * 2, bijiAwal));
                 holes[i].update();
                 xh += 50;
             } else {
-                // idx 7 menjadi bank MUSUH
                 yh = 100;
+
+                // idx 7 menjadi bank MUSUH
                 holes.push(new Hole(radb * 2, "#611414", xh * 2, yh * 2, 0));
                 holes[i].update();
                 xh = 400;
@@ -70,9 +73,10 @@ function gameBegin() {
                 holes[i].update();
                 xh -= 50;
             } else {
-                // idx 15 menjadi bank PLAYER
                 xh = 50;
                 yh = 100;
+
+                // idx 15 menjadi bank PLAYER
                 holes.push(new Hole(radb * 2, "#021f55", xh * 2, yh * 2, 0));
                 holes[i].update();
             }
@@ -118,7 +122,6 @@ function Hole(rad, color, x, y, num) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
         ctx.fill();
-        ctx.stroke();
 
         // Membuat tulisan didalam lingkaran
         ctx.fillStyle = "white";

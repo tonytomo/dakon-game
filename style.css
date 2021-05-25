@@ -22,6 +22,11 @@ body {
 
 .title {
     margin: 0 auto .5em;
+    /* 672 x 207 */
+    width: 336px;
+    height: 104px;
+    background-image: url(assets/logoname.png);
+    background-size: 100%;
 }
 
 .gameArea {
