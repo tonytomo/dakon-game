@@ -14,6 +14,12 @@ var timeStep = 600;    // Waktu yg dibutuhkan setiap langkah
 var time0 = 0;          // Waktu untuk melewati bank lawan
 var setTime;            // Timeout kontroler
 
+// Color hex code
+var blue = "#021f55";
+var blueactive = "#1e4388";
+var red = "#611414";
+var redactive = "#921f1f";
+
 // Suara meletakan biji
 var dropsound = new Audio('assets/3224__edwin-p-manchester__04.wav');
 
@@ -54,14 +60,14 @@ function gameBegin() {
         if (i < 8) {
             if (i != 7) { 
                 // Lubang kecil MUSUH idx 0-6
-                holes.push(new Hole(rads * 2, "#611414", xh * 2, yh * 2, bijiAwal));
+                holes.push(new Hole(rads * 2, red, xh * 2, yh * 2, bijiAwal));
                 holes[i].update();
                 xh += 50;
             } else {
                 yh = 100;
 
                 // idx 7 menjadi bank MUSUH
-                holes.push(new Hole(radb * 2, "#611414", xh * 2, yh * 2, 0));
+                holes.push(new Hole(radb * 2, red, xh * 2, yh * 2, 0));
                 holes[i].update();
                 xh = 400;
                 yh = 150;
@@ -69,7 +75,7 @@ function gameBegin() {
         } else {
             if (i != 15) {
                 // Lubang kecil PLAYER idx 8-14
-                holes.push(new Hole(rads * 2, "#021f55", xh * 2, yh * 2, bijiAwal));
+                holes.push(new Hole(rads * 2, blue, xh * 2, yh * 2, bijiAwal));
                 holes[i].update();
                 xh -= 50;
             } else {
@@ -77,7 +83,7 @@ function gameBegin() {
                 yh = 100;
 
                 // idx 15 menjadi bank PLAYER
-                holes.push(new Hole(radb * 2, "#021f55", xh * 2, yh * 2, 0));
+                holes.push(new Hole(radb * 2, blue, xh * 2, yh * 2, 0));
                 holes[i].update();
             }
         }
@@ -139,7 +145,6 @@ function Hole(rad, color, x, y, num) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
         ctx.fill();
-        ctx.stroke();
 
         // Membuat tulisan didalam lingkaran
         ctx.fillStyle = "white";
@@ -157,18 +162,18 @@ function Hole(rad, color, x, y, num) {
 
     // Fungsi mengubah warna lubang wilayah PLAYER menjadi normal
     this.myColor = function () {
-        this.color = "#021f55";
+        this.color = blue;
     }
     // Fungsi mengubah warna lubang wilayah MUSUH menjadi normal
     this.enemyColor = function () {
-        this.color = "#611414";
+        this.color = red;
     }
     // Fungsi mengubah warna lubang wilayah PLAYER menjadi Aktif
     this.myActiveColor = function () {
-        this.color = "#1e4388";
+        this.color = blueactive;
     }
     // Fungsi mengubah warna lubang wilayah MUSUH menjadi Aktif
     this.enemyActiveColor = function () {
-        this.color = "#921f1f";
+        this.color = redactive;
     }
 }

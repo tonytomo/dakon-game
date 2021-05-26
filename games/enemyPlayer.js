@@ -173,7 +173,11 @@ function updateEnemyPNum(idx, i, n, timer) {
                 if (newIdx == 7) {
                     holes[newIdx].enemyColor();
                     holes[newIdx].update();
-                    enemyPTurn();
+                    // Enable tombol kontrol
+                    // PLAYER 2 main lagi
+                    for (i = 0; i < button.length; i++) {
+                        button1[i].disabled = false;
+                    }
                 } else {
                     if (holes[newIdx].num > 1) {
                         n = holes[newIdx].num;

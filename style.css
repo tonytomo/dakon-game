@@ -1,7 +1,9 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #d3d3d3;
+    background-image: url(assets/bodybg.JPG);
+    background-repeat: no-repeat;
+    background-size: 160%;
 }
 
 .container {
@@ -15,7 +17,7 @@ body {
 
     width: max-content;
     text-align: center;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
     box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
@@ -34,7 +36,7 @@ body {
 }
 
 canvas {
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     background-image: url(assets/bg2.png);
     background-size: 100%;
 }
@@ -71,27 +73,34 @@ canvas {
 }
 
 .player-1 {
-    bottom: 12%;
+    bottom: 11.8%;
 }
 
 .player-2 {
-    top: 11.2%;
+    top: 11%;
 }
 
 .gamecontrol {
+    position: absolute;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .pvpbtn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 1em 1em 0;
+
     color: white;
     background-color: #353535;
-    border: none;
+    border: inset;
     outline: none;
-    margin: .5em auto;
     padding: 1em 1.5em;
     transition-duration: 200ms;
+    border-radius: 10px;
     cursor: pointer;
 }
 .pvpbtn:hover {
@@ -99,13 +108,18 @@ canvas {
 }
 
 .restartbtn {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0 0 1em 1em;
+
     color: white;
-    background-color: #611414;
-    border: none;
+    background-color: #851212;
+    border: inset;
     outline: none;
-    margin: .5em auto;
     padding: 1em 1.5em;
     transition-duration: 200ms;
+    border-radius: 10px;
     cursor: pointer;
 }
 .restartbtn:hover {

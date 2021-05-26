@@ -40,7 +40,7 @@ function endCondition() {
     else if (holes[15].num > holes[7].num) {
         // WIN condition
         // PLAYER MENANG
-        var end = new Hole(60 * 2, "#021f55", 250 * 2, 100 * 2, "BLUE WIN");
+        var end = new Hole(60 * 2, "#1e4388", 250 * 2, 100 * 2, "BLUE WIN");
         end.showEnd();
 
         // Disable tombol kontrol
@@ -51,7 +51,7 @@ function endCondition() {
     } else {
         // LOSE condition
         // PLAYER KALAH
-        var end = new Hole(60 * 2, "#611414", 250 * 2, 100 * 2, "RED WIN");
+        var end = new Hole(60 * 2, "#921f1f", 250 * 2, 100 * 2, "RED WIN");
         end.showEnd();
 
         // Disable tombol kontrol

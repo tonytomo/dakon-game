@@ -57,16 +57,41 @@ function changeEnemyTurn(idx) {
     }
 }
 
+// Random index
+function randIdx() {
+    // Membuat index buatan random
+    while (n == 0) {
+        idx = Math.floor(Math.random() * 7);
+        n = holes[idx].num;
+    }
+}
+
+// Pilih biji paling banyak
+function maxIdx() {
+    // Berisi index
+    var max = 0;
+
+    // Cek satu per satu
+    for (i = 0; i <= 6; i++) {
+        if (max < holes[i].num) {
+            max = i;    // max = iterasi (index)
+        }
+    }
+
+    // Pindah index dari max ke idx
+    idx = max;
+    n = holes[idx].num;
+}
+
 //
 // GILIRAN MUSUH
 // nantinya akan ditambah fitur Kecerdasan Buatan
 // Untuk sekarang masih menggunakan acak
 //
 function enemyTurn() {
-    // Membuat index buatan random
     // Seperti PLAYER memilih lubang
-    var idx = Math.floor(Math.random() * 7);
-    var n = holes[idx].num; // Jumlah biji pada lubang index
+    var idx;
+    var n = 0; // Jumlah biji pada lubang index
 
     // Jumlah biji di wilayah MUSUH, tidak termasuk bank
     var sum = 0;
@@ -83,10 +108,21 @@ function enemyTurn() {
     else {
         // Jika lubang yang terpilih dari pengacakan berisi 0 biji
         // Maka akan melakukan pengacakan lagi hingga ada yang isi
-        while (n == 0) {
-            idx = Math.floor(Math.random() * 7);
-            n = holes[idx].num;
+        // Berisi index
+        var maxIdx = 0;
+        var maxNum = 0;
+
+        // Cek satu per satu
+        for (i = 0; i <= 6; i++) {
+            if (maxNum < holes[i].num) {
+                maxNum = holes[i].num;
+                maxIdx = i;    // max = iterasi (index)
+            }
         }
+
+        // Pindah index dari max ke idx
+        idx = maxIdx;
+        n = holes[idx].num;
 
         // Jika lubang tidak kosong
         if (n != 0) {
