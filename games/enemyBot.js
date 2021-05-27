@@ -59,11 +59,14 @@ function changeEnemyTurn(idx) {
 
 // Random index
 function randIdx() {
+    var ran;
+    var n = 0;
     // Membuat index buatan random
     while (n == 0) {
-        idx = Math.floor(Math.random() * 7);
+        ran = Math.floor(Math.random() * 7);
         n = holes[idx].num;
     }
+    return ran;
 }
 
 // Pilih biji paling banyak
@@ -73,14 +76,18 @@ function maxIdx() {
 
     // Cek satu per satu
     for (i = 0; i <= 6; i++) {
-        if (max < holes[i].num) {
+        if (max > holes[i].num) {
             max = i;    // max = iterasi (index)
         }
     }
 
-    // Pindah index dari max ke idx
-    idx = max;
-    n = holes[idx].num;
+    return max;
+}
+
+// Pilih biji dengan algoritma
+function optIdx() {
+    // AI nya taruh sini
+
 }
 
 //
@@ -107,21 +114,8 @@ function enemyTurn() {
     // Jika tidak,
     else {
         // Jika lubang yang terpilih dari pengacakan berisi 0 biji
-        // Maka akan melakukan pengacakan lagi hingga ada yang isi
-        // Berisi index
-        var maxIdx = 0;
-        var maxNum = 0;
-
-        // Cek satu per satu
-        for (i = 0; i <= 6; i++) {
-            if (maxNum < holes[i].num) {
-                maxNum = holes[i].num;
-                maxIdx = i;    // max = iterasi (index)
-            }
-        }
-
-        // Pindah index dari max ke idx
-        idx = maxIdx;
+        // Maka selanjutnya mencari index
+        idx = maxIdx();
         n = holes[idx].num;
 
         // Jika lubang tidak kosong
