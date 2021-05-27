@@ -77,6 +77,10 @@ function enemyPTurn(idx) {
     if (sum == 0) {
         endCondition();
     }
+    // Cek jika biji dalam lumbung lebih dari setengah dari total biji
+    else if (holes[7].num > bijiAwal * 7 || holes[15].num > bijiAwal * 7) {
+        endCondition();
+    }
     // Jika lubang tidak kosong
     else if (n != 0) {
 
@@ -192,7 +196,7 @@ function updateEnemyPNum(idx, i, n, timer) {
                         if (newIdx < 7) {
                             holes[newIdx].enemyColor();
                             holes[newIdx].update();
-                            changeEnemyTurn(newIdx);
+                            changeEnemyPTurn(newIdx);
                         } else {
                             holes[newIdx].myColor();
                             holes[newIdx].update();

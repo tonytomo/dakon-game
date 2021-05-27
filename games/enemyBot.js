@@ -111,6 +111,10 @@ function enemyTurn() {
     if (sum == 0) {
         endCondition();
     }
+    // Cek jika biji dalam lumbung lebih dari setengah dari total biji
+    else if (holes[7].num > bijiAwal * 7 || holes[15].num > bijiAwal * 7) {
+        endCondition();
+    }
     // Jika tidak,
     else {
         // Jika lubang yang terpilih dari pengacakan berisi 0 biji

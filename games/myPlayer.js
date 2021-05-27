@@ -92,6 +92,10 @@ function myTurn(idx) {
     if (sum == 0) {
         endCondition(); // Memanggil Fungsi EndCondition()
     }
+    // Cek jika biji dalam lumbung lebih dari setengah dari total biji
+    else if (holes[7].num > bijiAwal * 7 || holes[15].num > bijiAwal * 7) {
+        endCondition();
+    }
     // Jika lubang tidak kosong
     else if (n != 0) {
 
