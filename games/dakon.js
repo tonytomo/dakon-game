@@ -15,7 +15,7 @@ var time0 = 0;          // Waktu untuk melewati bank lawan
 var setTime;            // Timeout kontroler
 
 // Color hex code
-var blue = "#021f55";
+var blue = "#021e55";
 var blueactive = "#1e4388";
 var red = "#611414";
 var redactive = "#921f1f";
