@@ -1,5 +1,8 @@
 // Kalau biji terakhir MUSUH ditangan jatuh di lubang kecil di wilayah MUSUH
 function changeEnemyTurn(idx) {
+    // Change notif
+    addLog('Ganti giliranku!');
+
     var sum;
     holes[idx].clearNum();
     if (idx == 0) {
@@ -73,11 +76,14 @@ function randIdx() {
 function maxIdx() {
     // Berisi index
     var max = 0;
+    // Berisi num
+    var num = 0;
 
     // Cek satu per satu
     for (i = 0; i <= 6; i++) {
-        if (max < holes[i].num) {
+        if (num < holes[i].num) {
             max = i;    // max = iterasi (index)
+            num = holes[i].num;
         }
     }
 
@@ -126,9 +132,9 @@ function enemyTurn() {
         n = holes[idx].num;
 
         // Change notif
-        addLog('Musuh wes mulai!');
-        addLog(idx);
-        addLog(n);
+        addLog('Musuh sedang mulai!');
+        addLog('index = ' + idx);
+        addLog('jml biji = ' + n);
 
         // Jika lubang tidak kosong
         if (n != 0) {
@@ -175,7 +181,7 @@ function updateEnemyNum(idx, i, n, timer) {
             updateEnemyNum(idx, i, n + 1, time0);
 
             // Change notif
-            addLog('Musuh ketemu lumbung player!');
+            addLog('Musuh lewat lumbung player!');
         }
         //
         // PENJELASAN TIDAK BEDA

@@ -4,7 +4,7 @@
 //
 function changeMyTurn(idx) {
     // Change notif
-    addLog('Ganti musuh cuk!');
+    addLog('Ganti giliran musuh!');
 
     var sum;
     holes[idx].clearNum();
