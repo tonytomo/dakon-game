@@ -62,6 +62,17 @@ function endCondition() {
     }
 }
 
+// Fungsi log
+function addLog(logs) {
+    var log = document.getElementById('log');
+    var rect = document.createElement("li");
+    var text = document.createTextNode(logs);
+
+    rect.appendChild(text);
+    log.appendChild(rect);
+    log.lastChild.scrollIntoView(false);
+}
+
 // Fungsi RESTART permainan
 function restart() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);

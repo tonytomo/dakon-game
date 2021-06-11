@@ -8,9 +8,9 @@ var hand;       // Biji yang ada di tangan
 
 var pvpflag = 0; // Flag untuk Player vs player
 
-var bijiAwal = 5; // Biji awal di setiap lubang
+var bijiAwal = 7; // Biji awal di setiap lubang
 
-var timeStep = 600;    // Waktu yg dibutuhkan setiap langkah
+var timeStep = 400;    // Waktu yg dibutuhkan setiap langkah
 var time0 = 0;          // Waktu untuk melewati bank lawan
 var setTime;            // Timeout kontroler
 

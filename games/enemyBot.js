@@ -76,7 +76,7 @@ function maxIdx() {
 
     // Cek satu per satu
     for (i = 0; i <= 6; i++) {
-        if (max > holes[i].num) {
+        if (max < holes[i].num) {
             max = i;    // max = iterasi (index)
         }
     }
@@ -100,6 +100,9 @@ function enemyTurn() {
     var idx;
     var n = 0; // Jumlah biji pada lubang index
 
+    // Change notif
+    addLog('Giliran musuh!');
+
     // Jumlah biji di wilayah MUSUH, tidak termasuk bank
     var sum = 0;
     for (i = 0; i <= 6; i++) {
@@ -121,6 +124,11 @@ function enemyTurn() {
         // Maka selanjutnya mencari index
         idx = maxIdx();
         n = holes[idx].num;
+
+        // Change notif
+        addLog('Musuh wes mulai!');
+        addLog(idx);
+        addLog(n);
 
         // Jika lubang tidak kosong
         if (n != 0) {
@@ -165,6 +173,9 @@ function updateEnemyNum(idx, i, n, timer) {
         if (newIdx == 15) {
             i++;
             updateEnemyNum(idx, i, n + 1, time0);
+
+            // Change notif
+            addLog('Musuh ketemu lumbung player!');
         }
         //
         // PENJELASAN TIDAK BEDA

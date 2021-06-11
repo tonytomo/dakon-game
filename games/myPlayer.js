@@ -3,6 +3,9 @@
 // Kalau biji terakhir PLAYER ditangan jatuh di lubang kecil di wilayah PLAYER
 //
 function changeMyTurn(idx) {
+    // Change notif
+    addLog('Ganti musuh cuk!');
+
     var sum;
     holes[idx].clearNum();
     // Jika jatuh di lubang ke 1 dari kiri
@@ -87,6 +90,9 @@ function myTurn(idx) {
         sum += holes[i].num;
     }
 
+    // Change notif
+    addLog('Giliranku!');
+
     // Cek jika jumlah biji di wilayah PLAYER sudah = 0 atau habis
     // Jika habis, PERMAINAN SELESAI
     if (sum == 0) {
@@ -146,6 +152,9 @@ function updateMyNum(idx, i, n, timer) {
         // iterasi ditambah, n ditambah,
         // sehingga langsung melewati bank tanpa meletakan biji
         if (newIdx == 7) {
+            // Change notif
+            addLog('Lewat lumbung musuh!');
+
             i++;
             // waktu diubah menjadi 0ms
             updateMyNum(idx, i, n + 1, time0);

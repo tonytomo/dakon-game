@@ -6,6 +6,17 @@ body {
     background-size: 160%;
 }
 
+.log {
+    overflow-y: auto;
+    width: 250px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.log * {
+    color: #fff;
+}
+
 .container {
     position: absolute;
     margin: auto;
