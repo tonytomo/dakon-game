@@ -1,45 +1,57 @@
+html {
+    height: 100%;
+}
 body {
     margin: 0;
     padding: 0;
-    background-image: url(assets/bodybg.JPG);
-    background-repeat: no-repeat;
-    background-size: 160%;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
 }
 
 .log {
     overflow-y: auto;
-    width: 250px;
-    height: 500px;
-    background-color: rgba(255, 255, 255, 0.3);
+    width: 350px;
+    background-color: #222;
+    padding: 1em;
+}
+
+.log h2 {
+    margin: 0;
+    text-align: center;
 }
 
 .log * {
     color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#log {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    font-size: 11pt;
+}
+#log > li::before {
+    content: "> ";
 }
 
 .container {
-    position: absolute;
-    margin: auto;
     padding: 1em;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: max-content;
+    flex-basis: 100%;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
-    box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.2);
+    background-color: #444;
 }
 
 .title {
     margin: 0 auto .5em;
     /* 672 x 207 */
-    width: 336px;
-    height: 104px;
-    background-image: url(assets/logoname.png);
+    /* 546 x 99 */
+    width: 546px;
+    height: 99px;
+    background-image: url(assets/logoname2.png);
     background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .gameArea {
@@ -47,8 +59,7 @@ body {
 }
 
 canvas {
-    /* border: 1px solid #000000; */
-    background-image: url(assets/bg2.png);
+    background-image: url(assets/bg3.png);
     background-size: 100%;
 }
 
@@ -92,22 +103,18 @@ canvas {
 }
 
 .gamecontrol {
-    position: absolute;
-
+    margin-top: 1em;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .pvpbtn {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 0 1em 1em 0;
+    margin: 0 1em 1em 1em;
 
     color: white;
     background-color: #353535;
-    border: 3px solid white;
+    border: none;
     outline: none;
     padding: 1em 1.5em;
     transition-duration: 200ms;
@@ -119,14 +126,11 @@ canvas {
 }
 
 .restartbtn {
-    position: absolute;
-    left: 0;
-    bottom: 0;
     margin: 0 0 1em 1em;
 
     color: white;
     background-color: #851212;
-    border: 3px solid white;
+    border: none;
     outline: none;
     padding: 1em 1.5em;
     transition-duration: 200ms;
@@ -134,5 +138,5 @@ canvas {
     cursor: pointer;
 }
 .restartbtn:hover {
-    opacity: 0.8;
+    background-color: #a32f2f;
 }

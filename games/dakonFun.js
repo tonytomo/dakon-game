@@ -70,11 +70,14 @@ function addLog(logs) {
 
     rect.appendChild(text);
     log.appendChild(rect);
-    log.lastChild.scrollIntoView(false);
+    log.lastChild.scrollIntoView();
 }
 
 // Fungsi RESTART permainan
 function restart() {
+    // Add log
+    addLog('Game restarted!');
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     holes = [];
 
@@ -91,6 +94,9 @@ function pvpOn() {
     // Get element
     var pvpbtn = document.querySelector("#pvpbtn");
     if (pvpflag == 0) {
+        // Add log
+        addLog('Main mode PVP!');
+
         // Merubah text button
         pvpbtn.innerText = "PvP ON";
         pvpbtn.style.backgroundColor = "#021f55";
@@ -99,6 +105,9 @@ function pvpOn() {
         // Mode pvp activated
         pvpflag = 1;
     } else {
+        // Add log
+        addLog('Main mode PvBot!');
+
         // Merubah text button
         pvpbtn.innerText = "PvP OFF";
         pvpbtn.style.backgroundColor = "#353535";

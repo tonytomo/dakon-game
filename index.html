@@ -13,10 +13,6 @@
 </head>
 
 <body onload="init()">
-    <div class="log">
-        <h2>LOG</h2>
-        <ul id="log"></ul>
-    </div>
     <div class="container">
         <div class="title"></div>
 
@@ -47,17 +43,21 @@
                 <button onmousedown="tap(9)" class="btn"></button>
                 <button onmousedown="tap(8)" class="btn"></button>
             </div>
-
+        </div>
+        <div class="gamecontrol">
             <!-- Restart -->
             <button onmousedown="restart()" class="restartbtn">RESTART</button>
 
             <!-- PvP button -->
             <button onmousedown="pvpOn()" class="pvpbtn" id="pvpbtn">PvP OFF</button>
         </div>
-        <div class="gamecontrol">
-            <!-- kosong -->
-        </div>
     </div>
+    
+    <div class="log">
+        <h2>LOG</h2>
+        <ul id="log"></ul>
+    </div>
+
     <script src="games/dakon.js"></script>
     <script src="games/dakonFun.js"></script>
     <script src="games/enemyBot.js"></script>

@@ -1,6 +1,6 @@
 // Kalau biji terakhir MUSUH ditangan jatuh di lubang kecil di wilayah MUSUH
 function changeEnemyTurn(idx) {
-    // Change notif
+    // Add log
     addLog('Ganti giliranku!');
 
     var sum;
@@ -58,6 +58,10 @@ function changeEnemyTurn(idx) {
     for (i = 0; i < button.length; i++) {
         button[i].disabled = false;
     }
+
+    // Add log
+    addLog('Musuh nembak +' + sum);
+    addLog('MY TURN');
 }
 
 // Random index
@@ -106,8 +110,8 @@ function enemyTurn() {
     var idx;
     var n = 0; // Jumlah biji pada lubang index
 
-    // Change notif
-    addLog('Giliran musuh!');
+    // Add log
+    addLog('ENEMY TURN');
 
     // Jumlah biji di wilayah MUSUH, tidak termasuk bank
     var sum = 0;
@@ -131,10 +135,9 @@ function enemyTurn() {
         idx = maxIdx();
         n = holes[idx].num;
 
-        // Change notif
+        // Add log
         addLog('Musuh sedang mulai!');
-        addLog('index = ' + idx);
-        addLog('jml biji = ' + n);
+        addLog('idx = ' + idx + ', biji = ' + n);
 
         // Jika lubang tidak kosong
         if (n != 0) {
@@ -180,7 +183,7 @@ function updateEnemyNum(idx, i, n, timer) {
             i++;
             updateEnemyNum(idx, i, n + 1, time0);
 
-            // Change notif
+            // Add log
             addLog('Musuh lewat lumbung player!');
         }
         //
@@ -188,6 +191,9 @@ function updateEnemyNum(idx, i, n, timer) {
         // DENGAN PLAYER
         //
         else {
+            // Add log
+            addLog('Musuh berjalan!, idx = ' + newIdx);
+
             // Mengubah warna lubang yang aktif
             if (newIdx > 7) {
                 if (newIdx != 8) {
@@ -227,6 +233,10 @@ function updateEnemyNum(idx, i, n, timer) {
                 updateEnemyNum(idx, i, n, timeStep);
             } else {
                 if (newIdx == 7) {
+                    // Add log
+                    addLog('i > n, idx lumbung');
+                    addLog('idx = ' + idx + ', biji = ' + n);
+
                     holes[newIdx].enemyColor();
                     holes[newIdx].update();
                     enemyTurn();
@@ -240,8 +250,16 @@ function updateEnemyNum(idx, i, n, timer) {
                         hand.sumNum(n);
                         hand.update();
                         updateEnemyNum(newIdx, i, n, timeStep);
+
+                        // Add log
+                        addLog('i > n, biji > 0, ambil');
+                        addLog('idx = ' + idx + ', biji = ' + n);
                     } else {
                         if (newIdx < 7) {
+                            // Add log
+                            addLog('i > n, selesai, nembak');
+                            addLog('idx = ' + idx + ', biji = ' + n);
+
                             holes[newIdx].enemyColor();
                             holes[newIdx].update();
                             changeEnemyTurn(newIdx);
@@ -258,6 +276,12 @@ function updateEnemyNum(idx, i, n, timer) {
                             for (i = 0; i < button.length; i++) {
                                 button[i].disabled = false;
                             }
+                            // Add log
+                            addLog('i > n, selesai, area musuh');
+                            addLog('idx = ' + idx + ', biji = ' + n);
+                            
+                            // Add log
+                            addLog('MY TURN');
                         }
                     }
                 }

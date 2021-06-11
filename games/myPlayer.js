@@ -64,6 +64,9 @@ function changeMyTurn(idx) {
     hand.enemyColor();  // Ganti warna
     hand.update();      // update tangan
 
+    // Add log
+    addLog('Player nembak +' + sum);
+
     // GANTI GILIRAN
     // Flag lawan player atau bot
     if (pvpflag == 1) {
@@ -90,9 +93,6 @@ function myTurn(idx) {
         sum += holes[i].num;
     }
 
-    // Change notif
-    addLog('Giliranku!');
-
     // Cek jika jumlah biji di wilayah PLAYER sudah = 0 atau habis
     // Jika habis, PERMAINAN SELESAI
     if (sum == 0) {
@@ -104,6 +104,8 @@ function myTurn(idx) {
     }
     // Jika lubang tidak kosong
     else if (n != 0) {
+        // Change notif
+        addLog('Player sedang mulai!');
 
         // Mengubah warna tangan menjadi warna PLAYER
         hand.myColor();
