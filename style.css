@@ -138,9 +138,15 @@ canvas {
 }
 
 .logbtn {
-    background-color: #851212;
+    background-color: #021e55;
 }
 .logbtn:hover {
+    background-color: #1e4388;
+}
+.clearbtn {
+    background-color: #851212;
+}
+.clearbtn:hover {
     background-color: #a32f2f;
 }
 

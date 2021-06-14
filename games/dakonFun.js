@@ -205,3 +205,9 @@ function logToggle() {
         logs.style.display = "block";
     }
 }
+
+// Fungsi clear log
+function clearLog() {
+    // Menghapus semua child log
+    log.innerHTML = "";
+}
