@@ -98,6 +98,11 @@ function maxIdx() {
 // Pilih biji dengan algoritma
 function optIdx() {
     // AI nya taruh sini
+    addLog('!!!!!!!!!!!!!!');
+    addLog('!!!AI belum dimasukan!!!');
+    addLog('!!!return maxIdx!!!');
+    addLog('!!!!!!!!!!!!!!');
+
     return maxIdx();
 }
 

@@ -90,6 +90,7 @@ function addLog(logs) {
 // Fungsi RESTART permainan
 function restart() {
     // Add log
+    addLog('____________________');
     addLog('Game restarted!');
     addLog('Biji Awal = ' + biji.value);
 
@@ -112,7 +113,8 @@ function pvpOn() {
     var pvpbtn = document.getElementById('pvpbtn');
     if (pvpflag == 0) {
         // Add log
-        addLog('Main mode PVP!');
+        addLog('____________________');
+        addLog('~ PVP ON ~');
 
         // Merubah text button
         pvpbtn.innerText = "PvP ON";
@@ -123,7 +125,8 @@ function pvpOn() {
         pvpflag = 1;
     } else {
         // Add log
-        addLog('Main mode PvBot!');
+        addLog('____________________');
+        addLog('~ PVP OFF ~');
 
         // Merubah text button
         pvpbtn.innerText = "PvP OFF";
@@ -144,7 +147,8 @@ function changeMode() {
     var modebtn = document.getElementById('modebtn')
     if (mode == 0) {
         // Add log
-        addLog('BOT MAX');
+        addLog('____________________');
+        addLog('@@ BOT MAX @@');
 
         // Merubah text button
         modebtn.innerText = "MAX";
@@ -154,7 +158,8 @@ function changeMode() {
         mode = 1;
     } else if (mode == 1) {
         // Add log
-        addLog('BOT AI');
+        addLog('____________________');
+        addLog('@@ BOT AI @@');
 
         // Merubah text button
         modebtn.innerText = "AI";
@@ -164,7 +169,8 @@ function changeMode() {
         mode = 2;
     } else {
         // Add log
-        addLog('BOT RANDOM');
+        addLog('____________________');
+        addLog('@@ BOT RANDOM @@');
 
         // Merubah text button
         modebtn.innerText = "RANDOM";
