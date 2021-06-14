@@ -31,6 +31,11 @@ function endCondition() {
         var end = new Hole(60 * 2, "#414141", 250 * 2, 100 * 2, "TIE");
         end.showEnd();
 
+        // Add log
+        addLog('--------------');
+        addLog('PERMAINAN SERI');
+        addLog('--------------');
+
         // Disable tombol kontrol
         for (i = 0; i < button.length; i++) {
             button[i].disabled = true;
@@ -43,6 +48,11 @@ function endCondition() {
         var end = new Hole(60 * 2, "#1e4388", 250 * 2, 100 * 2, "BLUE WIN");
         end.showEnd();
 
+        // Add log
+        addLog('--------------');
+        addLog('BIRU MENANG');
+        addLog('--------------');
+
         // Disable tombol kontrol
         for (i = 0; i < button.length; i++) {
             button[i].disabled = true;
@@ -54,6 +64,11 @@ function endCondition() {
         var end = new Hole(60 * 2, "#921f1f", 250 * 2, 100 * 2, "RED WIN");
         end.showEnd();
 
+        // Add log
+        addLog('--------------');
+        addLog('MERAH MENANG');
+        addLog('--------------');
+
         // Disable tombol kontrol
         for (i = 0; i < button.length; i++) {
             button[i].disabled = true;
@@ -64,7 +79,6 @@ function endCondition() {
 
 // Fungsi log
 function addLog(logs) {
-    var log = document.getElementById('log');
     var rect = document.createElement("li");
     var text = document.createTextNode(logs);
 
@@ -77,6 +91,9 @@ function addLog(logs) {
 function restart() {
     // Add log
     addLog('Game restarted!');
+    addLog('Biji Awal = ' + biji.value);
+
+    bijiAwal = parseInt(biji.value);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     holes = [];
@@ -92,7 +109,7 @@ function restart() {
 // PvP toggle
 function pvpOn() {
     // Get element
-    var pvpbtn = document.querySelector("#pvpbtn");
+    var pvpbtn = document.getElementById('pvpbtn');
     if (pvpflag == 0) {
         // Add log
         addLog('Main mode PVP!');
@@ -121,6 +138,46 @@ function pvpOn() {
     restart();
 }
 
+// Algoritma toggle
+function changeMode() {
+    // Get element
+    var modebtn = document.getElementById('modebtn')
+    if (mode == 0) {
+        // Add log
+        addLog('BOT MAX');
+
+        // Merubah text button
+        modebtn.innerText = "MAX";
+        modebtn.style.backgroundColor = "#021f55";
+
+        // Ganti mode max index
+        mode = 1;
+    } else if (mode == 1) {
+        // Add log
+        addLog('BOT AI');
+
+        // Merubah text button
+        modebtn.innerText = "AI";
+        modebtn.style.backgroundColor = "#e3d409";
+
+        // Ganti mode optimal (AI)
+        mode = 2;
+    } else {
+        // Add log
+        addLog('BOT RANDOM');
+
+        // Merubah text button
+        modebtn.innerText = "RANDOM";
+        modebtn.style.backgroundColor = "#353535";
+
+        // Ganti mode random index
+        mode = 0;
+    }
+
+    // Auto restart
+    restart();
+}
+
 // Fungsi mulai langkah untuk PLAYER
 function tap(idx) {
     // Memanggil fungsi giliran PLAYER
@@ -131,4 +188,14 @@ function tap(idx) {
 function tap1(idx) {
     // Memanggil fungsi giliran PLAYER 2
     enemyPTurn(idx);
+}
+
+// Fungsi toggle log
+function logToggle() {
+    // Jika log aktif
+    if (logs.style.display == "block") {
+        logs.style.display = "none";
+    } else {
+        logs.style.display = "block";
+    }
 }

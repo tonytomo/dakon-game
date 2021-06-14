@@ -10,10 +10,21 @@ body {
 }
 
 .log {
+    display: none;
     overflow-y: auto;
     width: 350px;
+    box-sizing: border-box;
     background-color: #222;
     padding: 1em;
+}
+
+@media (max-width: 1300px) {
+    body {
+        display: block;
+    }
+    .log {
+        width: 100%;
+    }
 }
 
 .log h2 {
@@ -109,34 +120,47 @@ canvas {
     justify-content: center;
 }
 
-.pvpbtn {
+.gamecontrol > * {
     margin: 0 1em 1em 1em;
-
     color: white;
-    background-color: #353535;
     border: none;
     outline: none;
     padding: 1em 1.5em;
     transition-duration: 200ms;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.biji {
+    color: #000;
+    font-weight: bold;
+    cursor: text;
+}
+
+.logbtn {
+    background-color: #851212;
+}
+.logbtn:hover {
+    background-color: #a32f2f;
+}
+
+.pvpbtn {
+    background-color: #353535;
 }
 .pvpbtn:hover {
     opacity: 0.8;
 }
 
 .restartbtn {
-    margin: 0 0 1em 1em;
-
-    color: white;
     background-color: #851212;
-    border: none;
-    outline: none;
-    padding: 1em 1.5em;
-    transition-duration: 200ms;
-    border-radius: 10px;
-    cursor: pointer;
 }
 .restartbtn:hover {
     background-color: #a32f2f;
+}
+
+.modebtn {
+    background-color: #353535;
+}
+.modebtn:hover {
+    opacity: 0.8;
 }

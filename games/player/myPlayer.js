@@ -3,9 +3,6 @@
 // Kalau biji terakhir PLAYER ditangan jatuh di lubang kecil di wilayah PLAYER
 //
 function changeMyTurn(idx) {
-    // Change notif
-    addLog('Ganti giliran musuh!');
-
     var sum;
     holes[idx].clearNum();
     // Jika jatuh di lubang ke 1 dari kiri
@@ -65,7 +62,7 @@ function changeMyTurn(idx) {
     hand.update();      // update tangan
 
     // Add log
-    addLog('Player nembak +' + sum);
+    addLog('P1 selesai, NEMBAK +' + sum);
 
     // GANTI GILIRAN
     // Flag lawan player atau bot
@@ -105,7 +102,8 @@ function myTurn(idx) {
     // Jika lubang tidak kosong
     else if (n != 0) {
         // Change notif
-        addLog('Player sedang mulai!');
+        addLog('P1 mulai!');
+        addLog('P1 AMBIL= ' + n + ', di= ' + idx);
 
         // Mengubah warna tangan menjadi warna PLAYER
         hand.myColor();
@@ -140,14 +138,13 @@ function updateMyNum(idx, i, n, timer) {
     // Set Timeout setiap 1 detik
     // setiap detik menjalankan fungsi dibawah
     setTime = setTimeout(function () {
-        arrLength = holes.length;   // Panjang list = 15
         newIdx = idx + i;           // index baru = index + iterasi
 
         // Cek jika melewati idx 15 atau bank PLAYER
         // index baru dikurangi panjang list
         // sehingga mulai dari 0,1,...
-        if (newIdx >= arrLength) {
-            newIdx = newIdx - arrLength;
+        if (newIdx >= 16) {
+            newIdx = newIdx - 16;
         }
 
         // Cek jika melewati bank MUSUH
@@ -155,12 +152,15 @@ function updateMyNum(idx, i, n, timer) {
         // sehingga langsung melewati bank tanpa meletakan biji
         if (newIdx == 7) {
             // Change notif
-            addLog('Lewat lumbung musuh!');
+            addLog('P1 lewat lumbung lawan!');
 
             i++;
             // waktu diubah menjadi 0ms
             updateMyNum(idx, i, n + 1, time0);
         } else {
+            // Add log
+            addLog('P1 hand= ' + hand.num + ', idx= ' + newIdx);
+
             // Merubah Warna Lubang yang aktif
             // Jika di wilayah MUSUH menggunakan merah terang
             // di wilayah PLAYER menggunakan biru terang
@@ -233,6 +233,9 @@ function updateMyNum(idx, i, n, timer) {
 
                         // Melanjutkan langkah dengan mengambil isi dari lubang yang baru
                         updateMyNum(newIdx, i, n, timeStep);
+
+                        // Add log
+                        addLog('P1 LAGI= ' + n + ', di= ' + newIdx);
                     }
                     // Jika biji terakhir diletakan di lubang kecil yang kosong
                     else {

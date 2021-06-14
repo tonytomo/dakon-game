@@ -45,24 +45,34 @@
             </div>
         </div>
         <div class="gamecontrol">
+            <!-- Input biji awal -->
+            <input type="number" id="biji" class="biji" step="1" value="7">
+
             <!-- Restart -->
             <button onmousedown="restart()" class="restartbtn">RESTART</button>
 
             <!-- PvP button -->
             <button onmousedown="pvpOn()" class="pvpbtn" id="pvpbtn">PvP OFF</button>
+
+            <!-- Mode button -->
+            <button onmousedown="changeMode()" class="modebtn" id="modebtn">RANDOM</button>
+            
+            <!-- Toggle log -->
+            <button onmousedown="logToggle()" class="logbtn">LOG</button>
         </div>
     </div>
     
-    <div class="log">
+    <div class="log" id="logs">
         <h2>LOG</h2>
         <ul id="log"></ul>
     </div>
 
     <script src="games/dakon.js"></script>
+    <script src="games/comp.js"></script>
     <script src="games/dakonFun.js"></script>
-    <script src="games/enemyBot.js"></script>
-    <script src="games/enemyPlayer.js"></script>
-    <script src="games/myPlayer.js"></script>
+    <script src="games/player/enemyBot.js"></script>
+    <script src="games/player/enemyPlayer.js"></script>
+    <script src="games/player/myPlayer.js"></script>
 </body>
 
 </html>
