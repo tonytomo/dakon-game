@@ -278,7 +278,7 @@ function updateEnemyNum(idx, i, n, timer) {
                                 button[i].disabled = false;
                             }
                             // Add log
-                            addLog('B selesai, di= ' + idx);
+                            addLog('B selesai, di= ' + newIdx);
                             
                             // Add log
                             addLog('MY TURN');

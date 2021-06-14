@@ -216,6 +216,9 @@ function updateMyNum(idx, i, n, timer) {
                     holes[newIdx].myColor();
                     holes[newIdx].update();
 
+                    // Add log
+                    addLog('P1 AMBIL LAGI!');
+
                     // Enable tombol kontrol
                     for (i = 0; i < button.length; i++) {
                         button[i].disabled = false;
@@ -256,6 +259,9 @@ function updateMyNum(idx, i, n, timer) {
                             hand.clearNum();    // Biji sudah habis
                             hand.enemyColor();  // Ganti warna
                             hand.update();      // update tangan
+
+                            // Add log
+                            addLog('P1 selesai, di= ' + newIdx);
 
                             // GANTI GILIRAN
                             // Flag lawan player atau bot
