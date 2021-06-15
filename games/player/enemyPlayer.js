@@ -134,7 +134,7 @@ function updateEnemyPNum(idx, i, n, timer) {
         // iterasi ditambah, n ditambah,
         // sehingga langsung melewati bank tanpa meletakan biji
         if (newIdx == 15) {
-            newIdx++;
+            newIdx = 0;
             i++;
             n++;
 
@@ -146,7 +146,7 @@ function updateEnemyPNum(idx, i, n, timer) {
         // DENGAN PLAYER
         //
         // Add log
-        addLog('B hand= ' + hand.num + ', idx= ' + newIdx);
+        addLog('P2 hand= ' + hand.num + ', idx= ' + newIdx);
 
         // Mengubah warna lubang yang aktif
         if (newIdx > 7) {
