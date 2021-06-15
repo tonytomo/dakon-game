@@ -96,6 +96,8 @@ function restart() {
 
     bijiAwal = parseInt(biji.value);
 
+    updateAi(3, 0.6);
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     holes = [];
 
@@ -196,13 +198,13 @@ function tap1(idx) {
     enemyPTurn(idx);
 }
 
-// Fungsi toggle log
-function logToggle() {
-    // Jika log aktif
-    if (logs.style.display == "block") {
-        logs.style.display = "none";
+// Fungsi toggle stat
+function statToggle() {
+    // Jika stat aktif
+    if (stat.style.display == "flex") {
+        stat.style.display = "none";
     } else {
-        logs.style.display = "block";
+        stat.style.display = "flex";
     }
 }
 
@@ -210,4 +212,26 @@ function logToggle() {
 function clearLog() {
     // Menghapus semua child log
     log.innerHTML = "";
+}
+
+// Fungsi update ai box
+function updateAi(index, newNum) {
+    const aibox = document.getElementsByClassName("aibox");
+
+    // Update content
+    aibox[index].innerHTML = newNum;
+
+    // Update color
+    var inner = 0;
+
+    for (i = 0; i<7 ; i++) {
+        inner = parseFloat(aibox[i].innerHTML);
+        if (inner == 0) {
+            aibox[i].style.backgroundColor = "#444";
+        } else if (inner < 0) {
+            aibox[i].style.backgroundColor = "#1e4388";
+        } else if (inner > 0) {
+            aibox[i].style.backgroundColor = "#921f1f";
+        }
+    }
 }

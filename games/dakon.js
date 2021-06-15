@@ -31,6 +31,8 @@ var dropsound = new Audio('assets/3224__edwin-p-manchester__04.wav');
 const button = document.querySelectorAll(".btn");
 const button1 = document.querySelectorAll(".btn1");
 
+// Selector stat wrapper
+const stat = document.getElementById("stat");
 // Selector log
 const log = document.getElementById('log');
 // Selector log wrapper
