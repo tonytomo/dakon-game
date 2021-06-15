@@ -80,7 +80,7 @@ function changeMyTurn(idx) {
         // Add log
         addLog('BOT TURN');
 
-        enemyTurn();
+        setTime =  setTimeout(enemyTurn, 1000);
     }
 }
 
@@ -283,10 +283,11 @@ function updateMyNum(idx, i, n, timer) {
                             }
                         } else {
                             // BOT
-                            enemyTurn();
 
                             // Add log
                             addLog('BOT TURN');
+
+                            setTimeout(enemyTurn, 1000);
                         }
                     }
                 }
