@@ -71,8 +71,15 @@ function changeMyTurn(idx) {
         for (i = 0; i < button1.length; i++) {
             button1[i].disabled = false;
         }
+
+        // Add log
+        addLog('PLAYER 2 TURN');
     } else {
         // BOT
+
+        // Add log
+        addLog('BOT TURN');
+
         enemyTurn();
     }
 }
@@ -143,137 +150,143 @@ function updateMyNum(idx, i, n, timer) {
         // Cek jika melewati idx 15 atau bank PLAYER
         // index baru dikurangi panjang list
         // sehingga mulai dari 0,1,...
-        if (newIdx >= 16) {
-            newIdx = newIdx - 16;
+        while (newIdx > 15) {
+            newIdx -= 16;
         }
 
         // Cek jika melewati bank MUSUH
         // iterasi ditambah, n ditambah,
         // sehingga langsung melewati bank tanpa meletakan biji
         if (newIdx == 7) {
+            newIdx++;
+            i++;
+            n++;
+
             // Change notif
             addLog('P1 lewat lumbung lawan!');
+        }
+        // Add log
+        addLog('P1 hand= ' + hand.num + ', idx= ' + newIdx);
 
-            i++;
-            // waktu diubah menjadi 0ms
-            updateMyNum(idx, i, n + 1, time0);
-        } else {
-            // Add log
-            addLog('P1 hand= ' + hand.num + ', idx= ' + newIdx);
-
-            // Merubah Warna Lubang yang aktif
-            // Jika di wilayah MUSUH menggunakan merah terang
-            // di wilayah PLAYER menggunakan biru terang
-            // Setelah itu merubah lubang sebelumnya menjadi warna normal
-            if (newIdx > 7) {
-                if (newIdx != 8) {
-                    holes[newIdx - 1].myColor();
-                    holes[newIdx - 1].update();
-                } else {
-                    holes[newIdx - 2].enemyColor();
-                    holes[newIdx - 2].update();
-                }
-                holes[newIdx].myActiveColor();
-                holes[newIdx].update();
+        // Merubah Warna Lubang yang aktif
+        // Jika di wilayah MUSUH menggunakan merah terang
+        // di wilayah PLAYER menggunakan biru terang
+        // Setelah itu merubah lubang sebelumnya menjadi warna normal
+        if (newIdx > 7) {
+            if (newIdx != 8) {
+                holes[newIdx - 1].myColor();
+                holes[newIdx - 1].update();
             } else {
-                if (newIdx != 0) {
-                    holes[newIdx - 1].enemyColor();
-                    holes[newIdx - 1].update();
-                } else {
-                    holes[15].myColor();
-                    holes[15].update();
-                }
-                holes[newIdx].enemyActiveColor();
+                holes[newIdx - 2].enemyColor();
+                holes[newIdx - 2].update();
+            }
+            holes[newIdx].myActiveColor();
+            holes[newIdx].update();
+        } else {
+            if (newIdx != 0) {
+                holes[newIdx - 1].enemyColor();
+                holes[newIdx - 1].update();
+            } else {
+                holes[15].myColor();
+                holes[15].update();
+            }
+            holes[newIdx].enemyActiveColor();
+            holes[newIdx].update();
+        }
+
+        // Meletakan biji ke lubang yang dilalui
+        holes[newIdx].addNum(); // Menambah 1 biji
+        holes[newIdx].update(); // update lubang
+
+        // Stop sound lalu menyalakan lagi
+        dropsound.pause();
+        dropsound.currentTime = 0;
+        dropsound.play();
+
+        i++;    // Menambah iterasi setelah meletakan biji
+
+        // Jika iterasi belum lebih dari n
+        // Jika biji di tangan lebih dari 1
+        if (i <= n || hand.num > 1) {
+            hand.minNum();  // karena meletakan biji, biji berkurang dari tangan
+            hand.update();  // update isi tangan
+
+            // Lanjut ke lubang berikutnya
+            updateMyNum(idx, i, n, timeStep);
+        }
+
+        // Jika biji di tangan tinggal 1
+        else {
+            // Jika biji terakhir diletakan di bank PLAYER
+            // maka dapat mengambil biji lagi
+            if (newIdx == 15) {
+                holes[newIdx].myColor();
                 holes[newIdx].update();
-            }
 
-            // Meletakan biji ke lubang yang dilalui
-            holes[newIdx].addNum(); // Menambah 1 biji
-            holes[newIdx].update(); // update lubang
+                // Add log
+                addLog('P1 stop di LUMBUNG');
+                addLog('P1 AMBIL LAGI!');
 
-            // Stop sound lalu menyalakan lagi
-            dropsound.pause();
-            dropsound.currentTime = 0;
-            dropsound.play();
+                // Enable tombol kontrol
+                for (i = 0; i < button.length; i++) {
+                    button[i].disabled = false;
+                }
+            } else {
+                // Jika biji terakhir diletakan di lubang kecil dengan jumlah biji lebih dari 1
+                if (holes[newIdx].num > 1) {
+                    n = holes[newIdx].num;      // n menjadi biji pada lubang kecil yang baru
+                    i = 1;                      // iterasi kembali menjadi 1
+                    holes[newIdx].clearNum();   // mengosongkan lubang
+                    holes[newIdx].update();     // update lubang
+                    hand.clearNum();            // mengosongkan tangan
+                    hand.sumNum(n);             // mengambil biji pada lubang yang baru, sehingga masuk ke tangan
+                    hand.update();              // update isi tangan
 
-            i++;    // Menambah iterasi setelah meletakan biji
-
-            // Jika iterasi belum lebih dari n
-            // Jika biji di tangan lebih dari 1
-            if (i <= n || hand.num > 1) {
-                hand.minNum();  // karena meletakan biji, biji berkurang dari tangan
-                hand.update();  // update isi tangan
-
-                // Lanjut ke lubang berikutnya
-                updateMyNum(idx, i, n, timeStep);
-            }
-
-            // Jika biji di tangan tinggal 1
-            else {
-                // Jika biji terakhir diletakan di bank PLAYER
-                // maka dapat mengambil biji lagi
-                if (newIdx == 15) {
-                    holes[newIdx].myColor();
-                    holes[newIdx].update();
+                    // Melanjutkan langkah dengan mengambil isi dari lubang yang baru
+                    updateMyNum(newIdx, i, n, timeStep);
 
                     // Add log
-                    addLog('P1 AMBIL LAGI!');
-
-                    // Enable tombol kontrol
-                    for (i = 0; i < button.length; i++) {
-                        button[i].disabled = false;
+                    addLog('P1 LAGI= ' + n + ', di= ' + newIdx);
+                }
+                // Jika biji terakhir diletakan di lubang kecil yang kosong
+                else {
+                    // Jika yang kosong di daerah PLAYER
+                    // Maka ambil semua biji dari lubang yg berseberangan,
+                    // lalu GANTI GILIRAN
+                    if (newIdx > 7) {
+                        holes[newIdx].myColor();
+                        holes[newIdx].update();
+                        changeMyTurn(newIdx);
                     }
-                } else {
-                    // Jika biji terakhir diletakan di lubang kecil dengan jumlah biji lebih dari 1
-                    if (holes[newIdx].num > 1) {
-                        n = holes[newIdx].num;      // n menjadi biji pada lubang kecil yang baru
-                        i = 1;                      // iterasi kembali menjadi 1
-                        holes[newIdx].clearNum();   // mengosongkan lubang
-                        holes[newIdx].update();     // update lubang
-                        hand.clearNum();            // mengosongkan tangan
-                        hand.sumNum(n);             // mengambil biji pada lubang yang baru, sehingga masuk ke tangan
-                        hand.update();              // update isi tangan
+                    // daerah MUSUH
+                    // Auto GANTI GILIRAN
+                    else {
+                        holes[newIdx].enemyColor();
+                        holes[newIdx].update();
 
-                        // Melanjutkan langkah dengan mengambil isi dari lubang yang baru
-                        updateMyNum(newIdx, i, n, timeStep);
+                        hand.clearNum();    // Biji sudah habis
+                        hand.enemyColor();  // Ganti warna
+                        hand.update();      // update tangan
 
                         // Add log
-                        addLog('P1 LAGI= ' + n + ', di= ' + newIdx);
-                    }
-                    // Jika biji terakhir diletakan di lubang kecil yang kosong
-                    else {
-                        // Jika yang kosong di daerah PLAYER
-                        // Maka ambil semua biji dari lubang yg berseberangan,
-                        // lalu GANTI GILIRAN
-                        if (newIdx > 7) {
-                            holes[newIdx].myColor();
-                            holes[newIdx].update();
-                            changeMyTurn(newIdx);
-                        }
-                        // daerah MUSUH
-                        // Auto GANTI GILIRAN
-                        else {
-                            holes[newIdx].enemyColor();
-                            holes[newIdx].update();
+                        addLog('P1 selesai, di= ' + newIdx);
 
-                            hand.clearNum();    // Biji sudah habis
-                            hand.enemyColor();  // Ganti warna
-                            hand.update();      // update tangan
+                        // GANTI GILIRAN
+                        // Flag lawan player atau bot
+                        if (pvpflag == 1) {
+                            // Add log
+                            addLog('PLAYER 2 TURN');
+
+                            // Tombol controller PLAYER 2 enable
+                            for (i = 0; i < button1.length; i++) {
+                                button1[i].disabled = false;
+                            }
+                        } else {
+                            // BOT
+                            enemyTurn();
 
                             // Add log
-                            addLog('P1 selesai, di= ' + newIdx);
-
-                            // GANTI GILIRAN
-                            // Flag lawan player atau bot
-                            if (pvpflag == 1) {
-                                // Tombol controller PLAYER 2 enable
-                                for (i = 0; i < button1.length; i++) {
-                                    button1[i].disabled = false;
-                                }
-                            } else {
-                                // BOT
-                                enemyTurn();
-                            }
+                            addLog('BOT TURN');
                         }
                     }
                 }

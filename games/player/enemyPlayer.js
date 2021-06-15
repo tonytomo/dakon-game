@@ -57,6 +57,10 @@ function changeEnemyPTurn(idx) {
         button[i].disabled = false;
         button1[i].disabled = true;
     }
+
+    // Add log
+    addLog('P2 selesai, NEMBAK +' + sum);
+    addLog('PLAYER 1 TURN');
 }
 
 //
@@ -83,6 +87,9 @@ function enemyPTurn(idx) {
     }
     // Jika lubang tidak kosong
     else if (n != 0) {
+        // Add log
+        addLog('P2 mulai!');
+        addLog('P2 AMBIL= ' + n + ', di= ' + idx);
 
         // Disable tombol controller
         for (i = 0; i < button.length; i++) {
@@ -119,98 +126,117 @@ function updateEnemyPNum(idx, i, n, timer) {
 
         // Cek jika melewati lubang index 15 atau bank PLAYER
         // Index kembali ke 0
-        if (newIdx >= 16) {
-            newIdx = newIdx - 16;
+        while (newIdx > 15) {
+            newIdx -= 16;
         }
 
         // Cek jika melewati lubang bank PLAYER
         // iterasi ditambah, n ditambah,
         // sehingga langsung melewati bank tanpa meletakan biji
         if (newIdx == 15) {
+            newIdx++;
             i++;
-            updateEnemyPNum(idx, i, n + 1, time0);
+            n++;
+
+            // Add log
+            addLog('P2 lewat lumbung P1');
         }
         //
         // PENJELASAN TIDAK BEDA
         // DENGAN PLAYER
         //
-        else {
-            // Mengubah warna lubang yang aktif
-            if (newIdx > 7) {
-                if (newIdx != 8) {
-                    holes[newIdx - 1].myColor();
-                    holes[newIdx - 1].update();
-                } else {
-                    holes[7].enemyColor();
-                    holes[7].update();
-                }
-                holes[newIdx].myActiveColor();
-                holes[newIdx].update();
+        // Add log
+        addLog('B hand= ' + hand.num + ', idx= ' + newIdx);
+
+        // Mengubah warna lubang yang aktif
+        if (newIdx > 7) {
+            if (newIdx != 8) {
+                holes[newIdx - 1].myColor();
+                holes[newIdx - 1].update();
             } else {
-                if (newIdx != 0) {
-                    holes[newIdx - 1].enemyColor();
-                    holes[newIdx - 1].update();
-                } else {
-                    holes[14].myColor();
-                    holes[14].update();
-                }
-                holes[newIdx].enemyActiveColor();
-                holes[newIdx].update();
+                holes[7].enemyColor();
+                holes[7].update();
             }
-
-            // Meletakan biji ke lubang yang dilewati
-            holes[newIdx].addNum();
+            holes[newIdx].myActiveColor();
             holes[newIdx].update();
-
-            // Stop sound lalu menyalakan lagi
-            dropsound.pause();
-            dropsound.currentTime = 0;
-            dropsound.play();
-
-            i++;
-            if (i <= n || hand.num > 1) {
-                hand.minNum();
-                hand.update();
-                updateEnemyPNum(idx, i, n, timeStep);
+        } else {
+            if (newIdx != 0) {
+                holes[newIdx - 1].enemyColor();
+                holes[newIdx - 1].update();
             } else {
-                if (newIdx == 7) {
-                    holes[newIdx].enemyColor();
+                holes[14].myColor();
+                holes[14].update();
+            }
+            holes[newIdx].enemyActiveColor();
+            holes[newIdx].update();
+        }
+
+        // Meletakan biji ke lubang yang dilewati
+        holes[newIdx].addNum();
+        holes[newIdx].update();
+
+        // Stop sound lalu menyalakan lagi
+        dropsound.pause();
+        dropsound.currentTime = 0;
+        dropsound.play();
+
+        i++;
+        if (i <= n || hand.num > 1) {
+            hand.minNum();
+            hand.update();
+            updateEnemyPNum(idx, i, n, timeStep);
+        } else {
+            if (newIdx == 7) {
+                holes[newIdx].enemyColor();
+                holes[newIdx].update();
+
+                // Add log
+                addLog('P2 stop di LUMBUNG');
+                addLog('P2 AMBIL LAGI!');
+
+                // Enable tombol kontrol
+                // PLAYER 2 main lagi
+                for (i = 0; i < button.length; i++) {
+                    button1[i].disabled = false;
+                }
+            } else {
+                if (holes[newIdx].num > 1) {
+                    n = holes[newIdx].num;
+                    i = 1;
+                    holes[newIdx].clearNum();
                     holes[newIdx].update();
-                    // Enable tombol kontrol
-                    // PLAYER 2 main lagi
-                    for (i = 0; i < button.length; i++) {
-                        button1[i].disabled = false;
-                    }
+                    hand.clearNum();
+                    hand.sumNum(n);
+                    hand.update();
+                    updateEnemyPNum(newIdx, i, n, timeStep);
+
+                    // Add log
+                    addLog('P2 LAGI= ' + n + ', di= ' + newIdx);
                 } else {
-                    if (holes[newIdx].num > 1) {
-                        n = holes[newIdx].num;
-                        i = 1;
-                        holes[newIdx].clearNum();
+                    if (newIdx < 7) {
+                        holes[newIdx].enemyColor();
                         holes[newIdx].update();
-                        hand.clearNum();
-                        hand.sumNum(n);
-                        hand.update();
-                        updateEnemyPNum(newIdx, i, n, timeStep);
+                        changeEnemyPTurn(newIdx);
                     } else {
-                        if (newIdx < 7) {
-                            holes[newIdx].enemyColor();
-                            holes[newIdx].update();
-                            changeEnemyPTurn(newIdx);
-                        } else {
-                            holes[newIdx].myColor();
-                            holes[newIdx].update();
+                        holes[newIdx].myColor();
+                        holes[newIdx].update();
 
-                            hand.clearNum();    // Biji sudah habis
-                            hand.myColor();     // Ganti warna
-                            hand.update();      // update tangan
+                        hand.clearNum();    // Biji sudah habis
+                        hand.myColor();     // Ganti warna
+                        hand.update();      // update tangan
 
-                            // Enable tombol kontrol
-                            // GILIRAN PLAYER
-                            for (i = 0; i < button.length; i++) {
-                                button[i].disabled = false;
-                                button1[i].disabled = true;
-                            }
+                        // Enable tombol kontrol
+                        // GILIRAN PLAYER
+                        for (i = 0; i < button.length; i++) {
+                            button[i].disabled = false;
+                            button1[i].disabled = true;
                         }
+
+                        // Add log
+                        addLog('P2 selesai, di= ' + newIdx);
+
+                        // Add log
+                        addLog('PLAYER 1 TURN');
                     }
                 }
             }
