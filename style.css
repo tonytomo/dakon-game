@@ -10,7 +10,7 @@ body {
 }
 
 .stat {
-    display: flex;
+    display: none;
     min-width: 300px;
     flex-direction: column;
 }
@@ -180,7 +180,9 @@ canvas {
 .biji {
     color: #000;
     font-weight: bold;
+    font-family: sans-serif;
     cursor: text;
+    width: 4ch;
 }
 
 .logbtn {

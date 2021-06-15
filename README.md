@@ -8,16 +8,26 @@ _Game tradisional di Indonesia. Game ini dibuat menggunakan pure HTML, CSS, dan 
 
 Dakon/Congklak adalah suatu permainan tradisional yang dikenal dengan berbagai macam nama di seluruh Indonesia. Biasanya dalam permainan, sejenis cangkang kerang digunakan sebagai biji congklak dan jika tidak ada, kadang kala digunakan juga biji-bijian dari tumbuh-tumbuhan dan batu-batu kecil.
 
-## Cara bermain
+## Aturan bermain
 
-Permainan congklak dilakukan oleh dua orang. Dalam permainan mereka menggunakan papan yang dinamakan papan congklak dan 98 (14 x 7) buah biji yang dinamakan biji congklak atau buah congklak. Umumnya papan congklak terbuat dari kayu dan plastik, sedangkan bijinya terbuat dari cangkang kerang, biji-bijian, batu-batuan, kelereng atau plastik. Pada papan congklak terdapat 16 buah lubang yang terdiri atas 14 lubang kecil yang saling berhadapan dan 2 lubang besar di kedua sisinya. Setiap 7 lubang kecil di sisi pemain dan lubang besar di sisi kananya dianggap sebagai milik sang pemain.
+1. Permainan dakon adalah permainan giliran, jika salah satu pemain sedang bermain, pemain lainnya tidak dapat melakukan apa-apa sampai mendapat giliran.
+1. Ada 2 daerah, yaitu daerah pemain 1 dan pemain 2. Setiap daerah ada 7 lubang dan 1 lumbung.
+1. Pemain yang mendapat giliran dapat mengambil biji dari salah satu lubang di daerahnya. Lalu diputar searah jarum jam ke lubang berikutnya.
+1. Ketika berputar, setiap melewati lubang harus menaruh 1 biji (semua lubang kecuali lumbung lawan).
+1. Jika biji di tangan habis di lubang yang berisi biji, maka pemain harus mengambil semua biji di lubang tersebut lalu biji diputar kembali seperti di langkah 4.
+1. Jika biji di tangan habis di lumbung, maka pemain bisa bermain kembali seperti di langkah 3.
+1. Jika biji di tangan habis di lubang di daerahnya yang kosong, maka pemain mengambil semua biji di lubang tersebut dan lubang lawan yang berseberangan, lalu dimasukan ke lumbungnya.
+1. Jika biji di tangan habis di lubang di daerah lawan yang kosong, maka giliran pemain itu sudah selesai.
+1. Jika lubang kecil di daerah pemain yang mendapat giliran kosong semua, maka permainan selesai. Semua biji yang ada di daerahnya masuk ke lumbung masing-masing pemain.
 
-Pada awal permainan setiap lubang kecil diisi dengan tujuh buah biji. Dua orang pemain yang berhadapan, salah seorang yang memulai dapat memilih lubang yang akan diambil dan meletakkan satu ke lubang di sebelah kanannya dan seterusnya berlawanan arah jarum jam. Bila biji habis di lubang kecil yang berisi biji lainnya, ia dapat mengambil biji-biji tersebut dan melanjutkan mengisi, bila habis di lubang besar miliknya maka ia dapat melanjutkan dengan memilih lubang kecil di sisinya. Bila habis di lubang kecil di sisinya maka ia berhenti dan mengambil seluruh biji di sisi yang berhadapan. Tetapi bila berhenti di lubang kosong di sisi lawan maka ia berhenti dan tidak mendapatkan apa-apa.
+## Fitur (sementara)
 
-Permainan dianggap selesai bila sudah tidak ada biji lagi yang dapat diambil (seluruh biji ada di lubang besar kedua pemain). Pemenangnya adalah yang mendapatkan biji terbanyak.
-
-## Fitur
-
-__BISA MAEN PvP__ atau kalau gaada teman, maen sendiri __vsBOT__ juga bisa. BOT masih mengambil biji secara random.
+1. Bisa main melawan BOT, atau juga bisa PVP.
+1. Bisa pilih mode BOT, ada RANDOM, MAX, AI (belum bisa).
+1. Bisa mengatur jumlah biji awal.
+1. Log untuk setiap perubahan (untuk debug), menggunakan fungsi
+```
+addLog('pesan');
+```
 
 __Silahkan bermain. kalo ada bug bilang..__
