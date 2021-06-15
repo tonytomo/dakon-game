@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    background-color: #444;
 }
 body {
     margin: 0;
@@ -217,4 +218,21 @@ canvas {
 }
 .modebtn:hover {
     opacity: 0.8;
+}
+
+@media (max-width: 1024px) {
+    .gameArea {
+        position: absolute;
+    }
+    .title {
+        display: none;
+    }
+    .gamecontrol {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+    }
+    .logbtn, .clearbtn {
+        display: none;
+    }
 }
