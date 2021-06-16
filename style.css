@@ -261,7 +261,7 @@ canvas {
     background-color: #333;
     padding: 1em;
     width: 90ch;
-    height: 200px;
+    height: 500px;
     overflow-y: auto;
     border-radius: 5px;
 }
@@ -310,6 +310,9 @@ canvas {
 }
 
 @media (max-width: 1024px) {
+    .modal-box > .content {
+        height: 200px;
+    }
     .notif {
         position: fixed;
         top: 20px;
