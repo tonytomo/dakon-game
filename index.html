@@ -45,6 +45,9 @@
             </div>
         </div>
         <div class="gamecontrol">
+            <!-- Toggle stats -->
+            <button onmousedown="ruleToggle()" class="rulebtn">ATURAN</button>
+
             <!-- Input biji awal -->
             <input type="number" id="biji" class="biji" step="1" value="7">
 
@@ -65,6 +68,7 @@
         </div>
     </div>
 
+    <!-- Diagram AI dan Log -->
     <div class="stat" id="stat">
         <div class="aibot">
             <p class="aibox">0.5</p>
@@ -79,6 +83,38 @@
         <div class="log" id="logs">
             <h2>LOG</h2>
             <ul id="log"></ul>
+        </div>
+    </div>
+
+    <!-- Notifikasi -->
+    <div class="notif" id="notif">
+        <!-- Diisi notif dengan javascript -->
+        <p>Game mulai!</p>
+    </div>
+
+    <!-- Modal box berisi aturan -->
+    <div class="modal-box" id="rule">
+        <!-- Exit button -->
+        <button onmousedown="ruleToggle()">X</button>
+
+        <div class="content">
+            <h3>Aturan:</h3>
+            <ol>
+                <li>Ada 2 daerah, yaitu daerah pemain 1 dan pemain 2. Setiap daerah ada 7 lubang dan 1 lumbung.</li>
+                <li>Pemain yang mendapat giliran dapat mengambil biji dari salah satu lubang di daerahnya. Lalu diputar
+                    searah jarum jam ke lubang berikutnya.</li>
+                <li>Ketika berputar, setiap melewati lubang harus menaruh 1 biji (semua lubang kecuali lumbung lawan).
+                </li>
+                <li>Jika biji di tangan habis di lubang yang berisi biji, maka pemain harus mengambil semua biji di
+                    lubang tersebut lalu biji diputar kembali seperti di langkah 4.</li>
+                <li>Jika biji di tangan habis di lumbung, maka pemain bisa bermain kembali seperti di langkah 3.</li>
+                <li>Jika biji di tangan habis di lubang di daerahnya yang kosong, maka pemain mengambil semua biji di
+                    lubang tersebut dan lubang lawan yang berseberangan, lalu dimasukan ke lumbungnya.</li>
+                <li>Jika biji di tangan habis di lubang di daerah lawan yang kosong, maka giliran pemain itu sudah
+                    selesai.</li>
+                <li>Jika lubang kecil di daerah pemain yang mendapat giliran kosong semua, maka permainan selesai. Semua
+                    biji yang ada di daerahnya masuk ke lumbung masing-masing pemain.</li>
+            </ol>
         </div>
     </div>
 

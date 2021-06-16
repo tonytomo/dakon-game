@@ -93,6 +93,8 @@ function restart() {
     addLog('____________________');
     addLog('Game restarted!');
     addLog('Biji Awal = ' + biji.value);
+    // Add notif
+    addNotif('Game mulai!');
 
     bijiAwal = parseInt(biji.value);
 
@@ -223,15 +225,34 @@ function updateAi(index, newNum) {
 
     // Update color
     var inner = 0;
-
-    for (i = 0; i<7 ; i++) {
-        inner = parseFloat(aibox[i].innerHTML);
-        if (inner == 0) {
-            aibox[i].style.backgroundColor = "#444";
-        } else if (inner < 0) {
-            aibox[i].style.backgroundColor = "#1e4388";
-        } else if (inner > 0) {
-            aibox[i].style.backgroundColor = "#921f1f";
-        }
+    inner = parseFloat(aibox[index].innerHTML);
+    if (inner == 0) {
+        aibox[index].style.backgroundColor = "#444";
+    } else if (inner < 0) {
+        aibox[index].style.backgroundColor = "#1e4388";
+    } else if (inner > 0) {
+        aibox[index].style.backgroundColor = "#921f1f";
     }
+}
+
+// Fungsi toggle rule box
+function ruleToggle() {
+    // Jika rule box aktif
+    if (rule.style.display == "flex") {
+        rule.style.display = "none";
+    } else {
+        rule.style.display = "flex";
+    }
+}
+
+// Fungsi mengubah notif
+function addNotif(pesan) {
+    // Menghapus notif awal
+    notif.innerHTML = "";
+    // Menambah notif baru
+    var rect = document.createElement("p");
+    var text = document.createTextNode(pesan);
+
+    rect.appendChild(text);
+    notif.appendChild(rect);
 }

@@ -61,6 +61,8 @@ function changeEnemyPTurn(idx) {
     // Add log
     addLog('P2 selesai, NEMBAK +' + sum);
     addLog('PLAYER 1 TURN');
+    // Add notif
+    addNotif('Giliran P1!');
 }
 
 //
@@ -147,6 +149,8 @@ function updateEnemyPNum(idx, i, n, timer) {
         //
         // Add log
         addLog('P2 hand= ' + hand.num + ', idx= ' + newIdx);
+        // Add notif
+        addNotif('P2 berjalan!');
 
         // Mengubah warna lubang yang aktif
         if (newIdx > 7) {
@@ -193,6 +197,8 @@ function updateEnemyPNum(idx, i, n, timer) {
                 // Add log
                 addLog('P2 stop di LUMBUNG');
                 addLog('P2 AMBIL LAGI!');
+                // Add notif
+                addNotif('P2 ambil lagi!');
 
                 // Enable tombol kontrol
                 // PLAYER 2 main lagi
@@ -237,6 +243,8 @@ function updateEnemyPNum(idx, i, n, timer) {
 
                         // Add log
                         addLog('PLAYER 1 TURN');
+                        // Add notif
+                        addNotif('Giliran P1!');
                     }
                 }
             }

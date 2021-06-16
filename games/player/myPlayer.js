@@ -74,13 +74,17 @@ function changeMyTurn(idx) {
 
         // Add log
         addLog('PLAYER 2 TURN');
+        // Add notif
+        addNotif('Giliran P2!');
     } else {
         // BOT
 
         // Add log
         addLog('BOT TURN');
+        // Add notif
+        addNotif('Giliran Bot!');
 
-        setTime =  setTimeout(enemyTurn, 1000);
+        setTime = setTimeout(enemyTurn, 1000);
     }
 }
 
@@ -108,7 +112,7 @@ function myTurn(idx) {
     }
     // Jika lubang tidak kosong
     else if (n != 0) {
-        // Change notif
+        // Add log
         addLog('P1 mulai!');
         addLog('P1 AMBIL= ' + n + ', di= ' + idx);
 
@@ -167,6 +171,8 @@ function updateMyNum(idx, i, n, timer) {
         }
         // Add log
         addLog('P1 hand= ' + hand.num + ', idx= ' + newIdx);
+        // Add notif
+        addNotif('P1 berjalan!');
 
         // Merubah Warna Lubang yang aktif
         // Jika di wilayah MUSUH menggunakan merah terang
@@ -226,6 +232,8 @@ function updateMyNum(idx, i, n, timer) {
                 // Add log
                 addLog('P1 stop di LUMBUNG');
                 addLog('P1 AMBIL LAGI!');
+                // Add notif
+                addNotif('P1 ambil lagi!');
 
                 // Enable tombol kontrol
                 for (i = 0; i < button.length; i++) {
@@ -276,6 +284,8 @@ function updateMyNum(idx, i, n, timer) {
                         if (pvpflag == 1) {
                             // Add log
                             addLog('PLAYER 2 TURN');
+                            // Add notif
+                            addNotif('Giliran P2!');
 
                             // Tombol controller PLAYER 2 enable
                             for (i = 0; i < button1.length; i++) {
@@ -286,6 +296,8 @@ function updateMyNum(idx, i, n, timer) {
 
                             // Add log
                             addLog('BOT TURN');
+                            // Add notif
+                            addNotif('Giliran Bot!');
 
                             setTimeout(enemyTurn, 1000);
                         }

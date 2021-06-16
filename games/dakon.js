@@ -38,6 +38,12 @@ const log = document.getElementById('log');
 // Selector log wrapper
 const logs = document.getElementById("logs");
 
+// Selector rules
+const rule = document.getElementById("rule");
+
+// Selector notif
+const notif = document.getElementById("notif");
+
 // List lubang
 // holes[7] menjadi bank MUSUH dan holes[15] menjadi bank PLAYER
 var holes = [];

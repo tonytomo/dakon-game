@@ -1,6 +1,7 @@
 html {
     height: 100%;
     background-color: #444;
+    position: relative;
 }
 body {
     margin: 0;
@@ -168,7 +169,7 @@ canvas {
 }
 
 .gamecontrol > * {
-    margin: 0 1em 1em 1em;
+    margin: 0 .5em 1em;
     color: white;
     border: none;
     outline: none;
@@ -176,6 +177,13 @@ canvas {
     transition-duration: 200ms;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.rulebtn {
+    background-color: #021e55;
+}
+.rulebtn:hover {
+    background-color: #1e4388;
 }
 
 .biji {
@@ -234,5 +242,76 @@ canvas {
     }
     .logbtn, .clearbtn {
         display: none;
+    }
+}
+
+.modal-box {
+    position: fixed;
+    display: none;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+.modal-box > .content {
+    background-color: #333;
+    padding: 1em;
+    width: 90ch;
+    height: 200px;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+.modal-box > button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    padding: .25em .5em;
+    font-size: 14pt;
+    font-family: sans-serif;
+}
+.modal-box > button:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
+.content > h3 {
+    margin: 0 0 0 1em;
+    color: #fff;
+    font-size: 20pt;
+}
+.content li {
+    color: #fff;
+    margin-right: 2em;
+    font-size: 15pt;
+}
+
+.notif {
+    position: absolute;
+    top: 130px;
+    /* bottom: 0; */
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.notif > * {
+    margin: 0;
+    font-size: 14pt;
+    font-family: sans-serif;
+    color: #fff;
+}
+
+@media (max-width: 1024px) {
+    .notif {
+        position: fixed;
+        top: 20px;
     }
 }

@@ -59,6 +59,8 @@ function changeEnemyTurn(idx) {
     // Add log
     addLog('B selesai, NEMBAK +' + sum);
     addLog('MY TURN');
+    // Add notif
+    addNotif('Giliran P1!');
 }
 
 // -----------------------------
@@ -196,13 +198,15 @@ function updateEnemyNum(idx, i, n, timer) {
             // Add log
             addLog('B lewat lumbung P1');
         }
-        
+
         //
         // PENJELASAN TIDAK BEDA
         // DENGAN PLAYER
         //
         // Add log
         addLog('B hand= ' + hand.num + ', idx= ' + newIdx);
+        // Add notif
+        addNotif('Bot berjalan!');
 
         // Mengubah warna lubang yang aktif
         if (newIdx > 7) {
@@ -245,6 +249,8 @@ function updateEnemyNum(idx, i, n, timer) {
             if (newIdx == 7) {
                 // Add log
                 addLog('B stop di LUMBUNG');
+                // Add notif
+                addNotif('Bot ambil lagi!');
 
                 holes[newIdx].enemyColor();
                 holes[newIdx].update();
@@ -285,6 +291,8 @@ function updateEnemyNum(idx, i, n, timer) {
 
                         // Add log
                         addLog('MY TURN');
+                        // Add notif
+                        addNotif('Giliran P1!');
                     }
                 }
             }
