@@ -97,15 +97,99 @@ function maxIdx() {
     return max;
 }
 
-// Pilih biji dengan algoritma
+// ----------------------
+// Pilih biji dengan A1
+// ----------------------
 function optIdx() {
-    // AI nya taruh sini
-    addLog('!!!!!!!!!!!!!!');
-    addLog('!!!AI belum dimasukan!!!');
-    addLog('!!!return maxIdx!!!');
-    addLog('!!!!!!!!!!!!!!');
+    // var fixidx;
+    var lidx = [];
+    lidx = findIdx();
+    for (var l = 0; l < lidx.length; l++) {
+        addLog("isi array = " + lidx[l]);
+    }
+    if (lidx.length != 0) {
+        addLog('ADA YG KE LUMBUNG');
+        // Fungsi mencari nilai lumbung terkecil player
 
-    return maxIdx();
+        return lidx[0];
+    } else {
+        addLog('ENGGAK ADA YG KE LUMBUNG');
+        return maxIdx();
+    }
+}
+
+var lumbung;    // Jumlah isi lumbung
+var lflag;      // Flag jika berhenti dilumbung
+var papan = []; // Virtual papan
+
+// Fungsi update papan
+function updatePapan() {
+    for (i = 0; i < 16; i++) {
+        if (papan.length != 0) {
+            papan[i] = holes[i].num;
+        } else {
+            papan.push(holes[i].num);
+        }
+    }
+}
+
+// Fungsi mencari array index yang berhenti dilumbung
+function findIdx() {
+    var allIdx = [];
+    var jml;
+    lumbung = holes[7].num;
+    lflag = 0;
+
+    for (var j = 0; j < 7; j++) {
+        updatePapan();
+        i = 1;
+        jml = papan[j];
+        papan[j] = 0;
+        var idxtemp = j;
+        
+        while (jml != 0) {
+            var nidx = idxtemp + i;
+
+            while (nidx > 15) {
+                nidx -= 16;
+            }
+
+            if (nidx == 15) {
+                nidx++;
+                i++;
+                jml++;
+            } else {
+
+                papan[nidx]++;
+
+                i++;
+                if (i > jml) {
+                    if (nidx == 7) {
+                        lflag = 1;
+                        jml = 0;
+                        // selesai di lumbung
+                    } else {
+                        if (papan[nidx] > 1) {
+                            i = 1;
+                            jml = papan[nidx];
+                            papan[nidx] = 0;
+                            idxtemp = nidx;
+                            // ambil lagi
+                        } else {
+                            jml = 0;
+                            // selesai
+                        }
+                    }
+                }
+            }
+        }
+
+        if (lflag == 1) {
+            allIdx.push(j);
+            lflag = 0;
+        }
+    }
+    return allIdx;
 }
 
 //

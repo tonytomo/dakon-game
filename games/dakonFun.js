@@ -256,3 +256,8 @@ function addNotif(pesan) {
     rect.appendChild(text);
     notif.appendChild(rect);
 }
+
+// FUngsi bot duluan
+function botFirst() {
+    enemyTurn();
+}
