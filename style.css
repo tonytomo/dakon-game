@@ -318,3 +318,9 @@ canvas {
         top: 20px;
     }
 }
+
+.gamecontrol button:disabled, .gamecontrol button:hover:disabled {
+    background-color: #333;
+    color: #000;
+    cursor: initial;
+}

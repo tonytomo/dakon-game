@@ -103,6 +103,10 @@ function restart() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     holes = [];
 
+    // Enable skip button
+    const skip = document.getElementById('skip');
+    skip.disabled = false;
+
     // Enable tombol kontrol
     for (i = 0; i < button.length; i++) {
         button[i].disabled = false;
@@ -259,5 +263,8 @@ function addNotif(pesan) {
 
 // FUngsi bot duluan
 function botFirst() {
+    const skip = document.getElementById('skip');
+    skip.disabled = true;
+
     enemyTurn();
 }

@@ -71,7 +71,7 @@ function changeEnemyTurn(idx) {
 function randIdx() {
     var ran = 0;
     var n = 0;
-    // Membuat index buatan random
+    // Membuat index buatan random 0-6
     while (n == 0) {
         ran = Math.floor(Math.random() * 7);
         n = holes[ran].num;
@@ -93,7 +93,6 @@ function maxIdx() {
             num = holes[i].num;
         }
     }
-
     return max;
 }
 
@@ -101,7 +100,7 @@ function maxIdx() {
 // Pilih biji dengan A1
 // ----------------------
 function optIdx() {
-    // var fixidx;
+    var fixidx;
     var lidx = [];
     lidx = findIdx();
     for (var l = 0; l < lidx.length; l++) {
@@ -111,7 +110,9 @@ function optIdx() {
         addLog('ADA YG KE LUMBUNG');
         // Fungsi mencari nilai lumbung terkecil player
 
-        return lidx[0];
+        // return random index ke lumbung
+        fixidx = Math.floor(Math.random() * lidx.length);
+        return lidx[fixidx];
     } else {
         addLog('ENGGAK ADA YG KE LUMBUNG');
         return maxIdx();
