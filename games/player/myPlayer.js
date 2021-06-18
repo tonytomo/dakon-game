@@ -101,6 +101,10 @@ function myTurn(idx) {
         sum += holes[i].num;
     }
 
+    // Disable skip
+    const skip = document.getElementById('skip');
+    skip.disabled = true;
+
     // Cek jika jumlah biji di wilayah PLAYER sudah = 0 atau habis
     // Jika habis, PERMAINAN SELESAI
     if (sum == 0) {

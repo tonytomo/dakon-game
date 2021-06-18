@@ -102,13 +102,30 @@ function maxIdx() {
 function optIdx() {
     var fixidx;
     var lidx = [];
-    lidx = findIdx();
+    var optidx = [];
+    lidx = findIdxAI();
     for (var l = 0; l < lidx.length; l++) {
         addLog("isi array = " + lidx[l]);
     }
     if (lidx.length != 0) {
         addLog('ADA YG KE LUMBUNG');
         // Fungsi mencari nilai lumbung terkecil player
+        // if (lidx.length > 1) {
+        //     addLog('Halo');
+        //     for (i = 0; i < lidx.length; i++) {
+        //         addLog('ulang' + lidx[i]);
+        //         var n = findIdxP(lidx[i]);  // Fungsi findIdxP belum bisa berjalan
+        //         optidx.push(n);
+        //         addLog(optidx[0]);
+        //     }
+        //     // Mencari min untuk player
+        //     optidx.sort(function(a, b){return a - b});
+        //     fixidx = optidx[0];
+        //     addLog(fixidx);
+        //     return fixidx;
+        // } else {
+        //     return lidx[0];
+        // }
 
         // return random index ke lumbung
         fixidx = Math.floor(Math.random() * lidx.length);
@@ -122,6 +139,7 @@ function optIdx() {
 var lumbung;    // Jumlah isi lumbung
 var lflag;      // Flag jika berhenti dilumbung
 var papan = []; // Virtual papan
+var papan2 = []; // Virtual papan 2
 
 // Fungsi update papan
 function updatePapan() {
@@ -135,10 +153,9 @@ function updatePapan() {
 }
 
 // Fungsi mencari array index yang berhenti dilumbung
-function findIdx() {
+function findIdxAI() {
     var allIdx = [];
     var jml;
-    lumbung = holes[7].num;
     lflag = 0;
 
     for (var j = 0; j < 7; j++) {
@@ -147,7 +164,7 @@ function findIdx() {
         jml = papan[j];
         papan[j] = 0;
         var idxtemp = j;
-        
+
         while (jml != 0) {
             var nidx = idxtemp + i;
 
@@ -191,6 +208,186 @@ function findIdx() {
         }
     }
     return allIdx;
+}
+
+// Fungsi AI move untuk mengubah papan
+function doMoveAI(index) {
+    i = 1;
+    jml = papan[j];
+    papan[j] = 0;
+    var idxtemp = index;
+
+    while (jml != 0) {
+        var nidx = idxtemp + i;
+
+        while (nidx > 15) {
+            nidx -= 16;
+        }
+
+        if (nidx == 7) {
+            nidx++;
+            i++;
+            jml++;
+        } else {
+
+            papan[nidx]++;
+
+            i++;
+            if (i > jml) {
+                if (nidx == 15) {
+                    jml = 0;
+                    // selesai di lumbung
+                } else {
+                    if (papan[nidx] > 1) {
+                        i = 1;
+                        jml = papan[nidx];
+                        papan[nidx] = 0;
+                        idxtemp = nidx;
+                        // ambil lagi
+                    } else {
+                        if (nidx > 7) {
+                            if (nidx == 14) {
+                                sum = papan[0] + 1;
+                                papan[7] += sum;
+                            }
+                            if (nidx == 13) {
+                                sum = papan[1] + 1;
+                                papan[7] += sum;
+                            }
+                            if (nidx == 12) {
+                                sum = papan[2] + 1;
+                                papan[7] += sum;
+                            }
+                            if (nidx == 11) {
+                                sum = papan[3] + 1;
+                                papan[7] += sum;
+                            }
+                            if (nidx == 10) {
+                                sum = papan[4] + 1;
+                                papan[7] += sum;
+                            }
+                            if (nidx == 9) {
+                                sum = papan[5] + 1;
+                                papan[7] += sum;
+                            }
+                            if (nidx == 8) {
+                                sum = papan[6] + 1;
+                                papan[7] += sum;
+                            }
+                            jml = 0;
+                            // selesai dengan nembak
+                        } else {
+                            jml = 0;
+                            // selesai
+                        }
+                    }
+                }
+            }
+        }
+    }
+    updatePapan2();
+}
+
+// Fungsi update papan 2
+function updatePapan2() {
+    for (i = 0; i < 16; i++) {
+        if (papan2.length != 0) {
+            papan2[i] = papan[i];
+        } else {
+            papan2.push(papan[i]);
+        }
+    }
+}
+
+// Mencoba semua index player dengan lumbungnya
+function findIdxP(index) {
+    var jml;
+    var max = papan2[15];
+    var maxidx = index;
+
+    for (var j = 0; j < 7; j++) {
+        doMoveAI(index);
+        i = 1;
+        jml = papan2[j];
+        papan2[j] = 0;
+        var idxtemp = j;
+
+        while (jml != 0) {
+            var nidx = idxtemp + i;
+
+            while (nidx > 15) {
+                nidx -= 16;
+            }
+
+            if (nidx == 7) {
+                nidx++;
+                i++;
+                jml++;
+            } else {
+
+                papan2[nidx]++;
+
+                i++;
+                if (i > jml) {
+                    if (nidx == 15) {
+                        jml = 0;
+                        // selesai di lumbung
+                    } else {
+                        if (papan2[nidx] > 1) {
+                            i = 1;
+                            jml = papan2[nidx];
+                            papan2[nidx] = 0;
+                            idxtemp = nidx;
+                            // ambil lagi
+                        } else {
+                            if (nidx > 7) {
+                                if (nidx == 14) {
+                                    sum = papan2[0] + 1;
+                                    papan2[15] += sum;
+                                }
+                                if (nidx == 13) {
+                                    sum = papan2[1] + 1;
+                                    papan2[15] += sum;
+                                }
+                                if (nidx == 12) {
+                                    sum = papan2[2] + 1;
+                                    papan2[15] += sum;
+                                }
+                                if (nidx == 11) {
+                                    sum = papan2[3] + 1;
+                                    papan2[15] += sum;
+                                }
+                                if (nidx == 10) {
+                                    sum = papan2[4] + 1;
+                                    papan2[15] += sum;
+                                }
+                                if (nidx == 9) {
+                                    sum = papan2[5] + 1;
+                                    papan2[15] += sum;
+                                }
+                                if (nidx == 8) {
+                                    sum = papan2[6] + 1;
+                                    papan2[15] += sum;
+                                }
+                                jml = 0;
+                                // selesai dengan nembak
+                            } else {
+                                jml = 0;
+                                // selesai
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (max < papan2[15]) {
+            maxidx = j;
+            max = papan2[15];
+        }
+    }
+
+    return maxidx;
 }
 
 //

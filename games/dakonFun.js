@@ -266,5 +266,11 @@ function botFirst() {
     const skip = document.getElementById('skip');
     skip.disabled = true;
 
+    // Disable tombol controller
+    for (i = 0; i < button.length; i++) {
+        button[i].disabled = true;
+        button1[i].disabled = true;
+    }
+
     enemyTurn();
 }
