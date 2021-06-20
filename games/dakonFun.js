@@ -118,7 +118,8 @@ function restart() {
 // PvP toggle
 function pvpOn() {
     // Get element
-    var pvpbtn = document.getElementById('pvpbtn');
+    const pvpbtn = document.getElementById('pvpbtn');
+    const modebtn = document.getElementById('modebtn');
     if (pvpflag == 0) {
         // Add log
         addLog('____________________');
@@ -127,6 +128,9 @@ function pvpOn() {
         // Merubah text button
         pvpbtn.innerText = "PvP ON";
         pvpbtn.style.backgroundColor = "#021f55";
+
+        // Disable mode button
+        modebtn.disabled = true;
 
         // Merubah flag menjadi 1
         // Mode pvp activated
@@ -140,6 +144,9 @@ function pvpOn() {
         pvpbtn.innerText = "PvP OFF";
         pvpbtn.style.backgroundColor = "#353535";
 
+        // Enable mode button
+        modebtn.disabled = false;
+
         // Merubah flag menjadi 0
         // Mode pvp deactivated
         pvpflag = 0;
@@ -152,7 +159,7 @@ function pvpOn() {
 // Algoritma toggle
 function changeMode() {
     // Get element
-    var modebtn = document.getElementById('modebtn')
+    const modebtn = document.getElementById('modebtn');
     if (mode == 0) {
         // Add log
         addLog('____________________');

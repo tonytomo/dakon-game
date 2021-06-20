@@ -3,6 +3,7 @@ html {
     background-color: #444;
     position: relative;
 }
+
 body {
     margin: 0;
     padding: 0;
@@ -28,7 +29,8 @@ body {
     justify-content: center;
     gap: 5px;
 }
-.aibot > * {
+
+.aibot>* {
     margin: 0;
     height: 25px;
     width: 35px;
@@ -67,7 +69,7 @@ hr {
         flex-basis: 100%;
         height: 200px;
     }
-    .aibot > * {
+    .aibot>* {
         height: 43px;
         width: 60px;
         padding-top: 15px;
@@ -91,7 +93,8 @@ hr {
     padding-left: 0;
     font-size: 11pt;
 }
-#log > li::before {
+
+#log>li::before {
     content: "> ";
 }
 
@@ -99,12 +102,11 @@ hr {
     padding: 1em;
     flex-basis: 100%;
     text-align: center;
-    background-color: #444;
 }
 
 .title {
     margin: 0 auto .5em;
-    /* 672 x 207 */
+    /* 336 x 103 */
     /* 546 x 99 */
     width: 546px;
     height: 99px;
@@ -125,16 +127,15 @@ canvas {
 .controller {
     position: absolute;
     padding: 1em;
-
     left: 50%;
     transform: translateX(-50%);
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
 }
-.controller > * {
+
+.controller>* {
     width: 80px;
     height: 80px;
     font-size: 15pt;
@@ -145,11 +146,12 @@ canvas {
     background-color: rgba(255, 255, 255, 0);
 }
 
-.controller > *:hover:enabled {
+.controller>*:hover:enabled {
     background-color: rgba(255, 255, 255, 0.3);
     cursor: pointer;
 }
-.controller > *:hover:disabled {
+
+.controller>*:hover:disabled {
     cursor: default;
 }
 
@@ -168,7 +170,7 @@ canvas {
     justify-content: center;
 }
 
-.gamecontrol > * {
+.gamecontrol>* {
     margin: 0 .5em 1em;
     color: white;
     border: none;
@@ -182,6 +184,7 @@ canvas {
 .rulebtn {
     background-color: #021e55;
 }
+
 .rulebtn:hover {
     background-color: #1e4388;
 }
@@ -197,12 +200,15 @@ canvas {
 .logbtn {
     background-color: #021e55;
 }
+
 .logbtn:hover {
     background-color: #1e4388;
 }
+
 .clearbtn {
     background-color: #851212;
 }
+
 .clearbtn:hover {
     background-color: #a32f2f;
 }
@@ -210,6 +216,7 @@ canvas {
 .pvpbtn {
     background-color: #353535;
 }
+
 .pvpbtn:hover {
     opacity: 0.8;
 }
@@ -217,6 +224,7 @@ canvas {
 .restartbtn {
     background-color: #851212;
 }
+
 .restartbtn:hover {
     background-color: #a32f2f;
 }
@@ -224,11 +232,20 @@ canvas {
 .modebtn {
     background-color: #353535;
 }
+
 .modebtn:hover {
     opacity: 0.8;
 }
 
 @media (max-width: 1024px) {
+    html {
+        background-image: url(assets/grass.jpg);
+        background-repeat: repeat;
+    }
+    canvas {
+        background-image: url(assets/bg4.png);
+        background-size: 100%;
+    }
     .gameArea {
         position: absolute;
     }
@@ -257,7 +274,8 @@ canvas {
     align-items: center;
     font-family: sans-serif;
 }
-.modal-box > .content {
+
+.modal-box>.content {
     background-color: #333;
     padding: 1em;
     width: 90ch;
@@ -265,7 +283,8 @@ canvas {
     overflow-y: auto;
     border-radius: 5px;
 }
-.modal-box > button {
+
+.modal-box>button {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -276,15 +295,18 @@ canvas {
     font-size: 14pt;
     font-family: sans-serif;
 }
-.modal-box > button:hover {
+
+.modal-box>button:hover {
     cursor: pointer;
     background-color: #ddd;
 }
-.content > h3 {
+
+.content>h3 {
     margin: 0 0 0 1em;
     color: #fff;
     font-size: 20pt;
 }
+
 .content li {
     color: #fff;
     margin-right: 2em;
@@ -294,7 +316,6 @@ canvas {
 .notif {
     position: absolute;
     top: 130px;
-    /* bottom: 0; */
     left: 0;
     right: 0;
     display: flex;
@@ -302,7 +323,8 @@ canvas {
     align-items: center;
     gap: 5px;
 }
-.notif > * {
+
+.notif>* {
     margin: 0;
     font-size: 14pt;
     font-family: sans-serif;
@@ -310,7 +332,7 @@ canvas {
 }
 
 @media (max-width: 1024px) {
-    .modal-box > .content {
+    .modal-box>.content {
         height: 200px;
     }
     .notif {
