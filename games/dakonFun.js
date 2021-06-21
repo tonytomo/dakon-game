@@ -98,7 +98,9 @@ function restart() {
 
     bijiAwal = parseInt(biji.value);
 
-    updateAi(3, 0.6);
+    for (i = 0; i < 7; i++) {
+        updateAi(i, 0.5);
+    }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     holes = [];
@@ -237,11 +239,11 @@ function updateAi(index, newNum) {
     // Update color
     var inner = 0;
     inner = parseFloat(aibox[index].innerHTML);
-    if (inner == 0) {
+    if (inner == 0.5) {
         aibox[index].style.backgroundColor = "#444";
-    } else if (inner < 0) {
+    } else if (inner < 0.5) {
         aibox[index].style.backgroundColor = "#1e4388";
-    } else if (inner > 0) {
+    } else if (inner > 0.5) {
         aibox[index].style.backgroundColor = "#921f1f";
     }
 }
