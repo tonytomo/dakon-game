@@ -110,7 +110,7 @@ function optIdx() {
     var maxlumbung;
     var lidx = [];
     var optidx = [];
-    
+
     // Mencari idx yang berakhir di lumbung AI
     lidx = findIdxAI();
 
@@ -126,14 +126,14 @@ function optIdx() {
 
                 // Mencoba menjalankan semua lubang player untuk mendapatkan max tiap lidx
                 var n = findIdxP();
-                addLog('max yg didapat di ' + temp + ' = ' + n);
+                addLog(temp + ' | max yg didapat = ' + n);
                 updateAi(temp, ((allbiji - n) / allbiji).toFixed(1));
                 optidx.push(n);
             }
 
             // Mencari min untuk player
             fixidx = findMin(optidx);
-            addLog('idx optimal = ' + lidx[fixidx]);
+            addLog('idx minimum = ' + lidx[fixidx]);
             return lidx[fixidx];
         } else {
             return lidx[0];
@@ -273,7 +273,7 @@ function findIdxAI() {
         if (lflag == 1) {
             allIdx.push(j);
             lflag = 0;
-            updateAi(j, 1);
+            updateAi(j, ((allbiji - papan[7]) / allbiji).toFixed(1));
         } else {
             updateAi(j, (papan[7] / allbiji).toFixed(1));
         }
