@@ -154,7 +154,7 @@ function optIdx() {
                 }
                 addLog(k + ' | maxl= ' + maxlumbung + ', lumbung= ' + papan[7]);
             }
-            updateAi(k, (maxlumbung / allbiji).toFixed(1));
+            updateAi(k, (papan[7] / allbiji).toFixed(1));
         }
         addLog('idx lumbung terbanyak = ' + fixidx);
         return fixidx;
