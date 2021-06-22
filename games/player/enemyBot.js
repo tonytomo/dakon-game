@@ -136,6 +136,7 @@ function optIdx() {
             addLog('idx minimum = ' + lidx[fixidx]);
             return lidx[fixidx];
         } else {
+            addLog('idx ke lumbung = ' + lidx[0]);
             return lidx[0];
         }
     } else {
