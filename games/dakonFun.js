@@ -165,10 +165,10 @@ function changeMode() {
     if (mode == 0) {
         // Add log
         addLog('____________________');
-        addLog('@@ BOT MAX @@');
+        addLog('@@ BOT MEDIUM @@');
 
         // Merubah text button
-        modebtn.innerText = "MAX";
+        modebtn.innerText = "MEDIUM";
         modebtn.style.backgroundColor = "#021f55";
 
         // Ganti mode max index
@@ -176,22 +176,22 @@ function changeMode() {
     } else if (mode == 1) {
         // Add log
         addLog('____________________');
-        addLog('@@ BOT AI @@');
+        addLog('@@ BOT EXPERT @@');
 
         // Merubah text button
-        modebtn.innerText = "AI";
-        modebtn.style.backgroundColor = "#e3d409";
+        modebtn.innerText = "EXPERT";
+        modebtn.style.backgroundColor = "#490f70";
 
         // Ganti mode optimal (AI)
         mode = 2;
     } else {
         // Add log
         addLog('____________________');
-        addLog('@@ BOT RANDOM @@');
+        addLog('@@ BOT EASY @@');
 
         // Merubah text button
-        modebtn.innerText = "RANDOM";
-        modebtn.style.backgroundColor = "#353535";
+        modebtn.innerText = "EASY";
+        modebtn.style.backgroundColor = "#005c02";
 
         // Ganti mode random index
         mode = 0;

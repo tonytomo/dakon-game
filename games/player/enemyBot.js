@@ -76,6 +76,7 @@ function randIdx() {
         ran = Math.floor(Math.random() * 7);
         n = holes[ran].num;
     }
+    addLog('idx di ambil = ' + ran);
     return ran;
 }
 
@@ -93,8 +94,13 @@ function maxIdx() {
             num = holes[i].num;
         }
     }
+    addLog('idx di ambil = ' + max);
     return max;
 }
+
+// ----------------------
+// Pilih biji dengan AI
+// ----------------------
 
 var lumbung;    // Jumlah isi lumbung
 var lflag;      // Flag jika berhenti dilumbung
@@ -102,9 +108,38 @@ var papan = []; // Virtual papan
 var papan2 = []; // Virtual papan 2
 var allbiji = bijiAwal * 14;
 
-// ----------------------
-// Pilih biji dengan A1
-// ----------------------
+// Pilih biji yang berakhir dilumbung lalu dirandom
+function optIdxM() {
+    var fixidx;
+    var lidx = [];
+
+    // Mencari idx yang berakhir di lumbung AI
+    lidx = findIdxAI();
+
+    if (lidx.length != 0) {
+        addLog('ADA YG KE LUMBUNG');
+        // Fungsi mencari nilai lumbung terkecil player
+        if (lidx.length > 1) {
+            fixidx = Math.floor(Math.random() * lidx.length);
+            // Biji yang kelumbung
+            for (i = 0; i < lidx.length; i++) {
+                addLog(lidx[i] + ' | idx ke lumbung');
+            }
+            addLog('idx di ambil = ' + lidx[fixidx]);
+            return lidx[fixidx];
+        } else {
+            addLog(lidx[0] + ' | idx ke lumbung');
+            addLog('idx di ambil = ' + lidx[0]);
+            return lidx[0];
+        }
+    } else {
+        // Jika tidak ada maka menggunakan random
+        addLog('ENGGAK ADA YG KE LUMBUNG');
+        return randIdx();
+    }
+}
+
+// Pilih biji yang berakhir dilumbung lalu dipilih yang meminimalkan player
 function optIdx() {
     var fixidx;
     var maxlumbung;
@@ -166,7 +201,7 @@ function optIdx() {
             fixidx = temp;
         }
 
-        addLog('idx max lumbung = ' + fixidx);
+        addLog(fixidx + ' | idx max lumbung');
         return fixidx;
     }
 }
@@ -204,7 +239,7 @@ function enemyTurn() {
         if (mode == 0) {
             idx = randIdx();
         } else if (mode == 1) {
-            idx = maxIdx();
+            idx = optIdxM();
         } else if (mode == 2) {
             idx = optIdx();
         }

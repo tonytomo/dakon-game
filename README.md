@@ -1,6 +1,6 @@
 # GAME DAKON
 
-<img src="assets/dakon.JPG" width="450" height="200">
+<img src="assets/dakon.JPG" width="507" height="190">
 
 _Game tradisional di Indonesia. Game ini dibuat menggunakan pure HTML, CSS, dan JS._
 
