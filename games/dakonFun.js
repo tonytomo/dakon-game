@@ -215,11 +215,15 @@ function tap1(idx) {
 
 // Fungsi toggle stat
 function statToggle() {
+    const title = document.getElementById('title');
+
     // Jika stat aktif
     if (stat.style.display == "flex") {
         stat.style.display = "none";
+        title.style.backgroundImage = "url(assets/logoname2.png)";
     } else {
         stat.style.display = "flex";
+        title.style.backgroundImage = "none";
     }
 }
 

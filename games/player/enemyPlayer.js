@@ -62,7 +62,7 @@ function changeEnemyPTurn(idx) {
     addLog('P2 selesai, NEMBAK +' + sum);
     addLog('PLAYER 1 TURN');
     // Add notif
-    addNotif('Giliran P1!');
+    addNotif('P2 nembak +' + sum + ', Giliran P1!');
 }
 
 //

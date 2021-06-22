@@ -75,14 +75,14 @@ function changeMyTurn(idx) {
         // Add log
         addLog('PLAYER 2 TURN');
         // Add notif
-        addNotif('Giliran P2!');
+        addNotif('P1 nembak +' + sum + ', Giliran P2!');
     } else {
         // BOT
 
         // Add log
         addLog('BOT TURN');
         // Add notif
-        addNotif('Giliran Bot!');
+        addNotif('P1 nembak +' + sum + ', Giliran Bot!');
 
         setTime = setTimeout(enemyTurn, 1000);
     }
