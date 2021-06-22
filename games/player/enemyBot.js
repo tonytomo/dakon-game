@@ -143,20 +143,29 @@ function optIdx() {
         addLog('ENGGAK ADA YG KE LUMBUNG');
 
         maxlumbung = papan[7];
-        fixidx = 0;
+        var temp;
+        var flag = 0;
 
         for (var k = 0; k < 7; k++) {
             updatePapan();
             if (papan[k] != 0) {
                 doMoveAI(k);
+                temp = k;
+                // Jika maxlumbung < lumbung, maxlumbung -> lumbung
                 if (maxlumbung < papan[7]) {
                     maxlumbung = papan[7];
                     fixidx = k;
+                    flag = 1;
                 }
                 addLog(k + ' | maxl= ' + maxlumbung + ', lumbung= ' + papan[7]);
             }
             updateAi(k, (papan[7] / allbiji).toFixed(1));
         }
+        // Jika maxlumbung tidak pernah berubah
+        if (flag == 0) {
+            fixidx = temp;
+        }
+
         addLog('idx lumbung terbanyak = ' + fixidx);
         return fixidx;
     }
