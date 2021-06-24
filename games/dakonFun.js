@@ -116,12 +116,13 @@ function restart() {
     clearTimeout(setTime);
     gameBegin();
 }
-
 // PvP toggle
 function pvpOn() {
     // Get element
     const pvpbtn = document.getElementById('pvpbtn');
     const modebtn = document.getElementById('modebtn');
+    const skip = document.getElementById('skip');
+
     if (pvpflag == 0) {
         // Add log
         addLog('____________________');
@@ -131,8 +132,9 @@ function pvpOn() {
         pvpbtn.innerText = "PvP ON";
         pvpbtn.style.backgroundColor = "#021f55";
 
-        // Disable mode button
+        // Disable mode button dan skip
         modebtn.disabled = true;
+        skip.style.display = "none";
 
         // Merubah flag menjadi 1
         // Mode pvp activated
@@ -146,8 +148,9 @@ function pvpOn() {
         pvpbtn.innerText = "PvP OFF";
         pvpbtn.style.backgroundColor = "#353535";
 
-        // Enable mode button
+        // Enable mode button dan skip
         modebtn.disabled = false;
+        skip.style.display = "block";
 
         // Merubah flag menjadi 0
         // Mode pvp deactivated
@@ -162,6 +165,7 @@ function pvpOn() {
 function changeMode() {
     // Get element
     const modebtn = document.getElementById('modebtn');
+
     if (mode == 0) {
         // Add log
         addLog('____________________');
@@ -170,7 +174,6 @@ function changeMode() {
         // Merubah text button
         modebtn.innerText = "MEDIUM";
         modebtn.style.backgroundColor = "#021f55";
-
         // Ganti mode max index
         mode = 1;
     } else if (mode == 1) {
@@ -215,15 +218,23 @@ function tap1(idx) {
 
 // Fungsi toggle stat
 function statToggle() {
+    const aibot = document.getElementById('aibot');
     const title = document.getElementById('title');
 
     // Jika stat aktif
-    if (stat.style.display == "flex") {
-        stat.style.display = "none";
-        title.style.backgroundImage = "url(assets/logoname2.png)";
-    } else {
+    if (stat.style.display == "none") {
         stat.style.display = "flex";
+
+        // Display aimind and hide title
+        aibot.style.display = "flex";
         title.style.backgroundImage = "none";
+
+    } else {
+        stat.style.display = "none";
+
+        // Hide aimind and display title
+        aibot.style.display = "none";
+        title.style.backgroundImage = "url(assets/logoname2.png)";
     }
 }
 
@@ -234,21 +245,32 @@ function clearLog() {
 }
 
 // Fungsi update ai box
-function updateAi(index, newNum) {
+function updateAi(index, newNum, chosen) {
     const aibox = document.getElementsByClassName("aibox");
 
-    // Update content
-    aibox[index].innerHTML = newNum;
+    if (newNum <= 1 && newNum >= 0) {
+        // Update content
+        aibox[index].innerHTML = newNum;
+    }
 
     // Update color
     var inner = 0;
     inner = parseFloat(aibox[index].innerHTML);
     if (inner == 0.5) {
-        aibox[index].style.backgroundColor = "#444";
+        if (chosen)
+            aibox[index].style.backgroundColor = "#555";
+        else
+            aibox[index].style.backgroundColor = "#444";
     } else if (inner < 0.5) {
-        aibox[index].style.backgroundColor = "#1e4388";
+        if (chosen)
+            aibox[index].style.backgroundColor = "#3765bd";
+        else
+            aibox[index].style.backgroundColor = "#1e4388";
     } else if (inner > 0.5) {
-        aibox[index].style.backgroundColor = "#921f1f";
+        if (chosen)
+            aibox[index].style.backgroundColor = "#c22d2d";
+        else
+            aibox[index].style.backgroundColor = "#921f1f";
     }
 }
 

@@ -76,6 +76,13 @@ function randIdx() {
         ran = Math.floor(Math.random() * 7);
         n = holes[ran].num;
     }
+    for (i = 0; i < 7; i++) {
+        if (ran == i) {
+            updateAi(i, 1, 1);
+        } else {
+            updateAi(i, 0);
+        }
+    }
     addLog('idx di ambil = ' + ran);
     return ran;
 }
@@ -126,10 +133,12 @@ function optIdxM() {
                 addLog(lidx[i] + ' | idx ke lumbung');
             }
             addLog('idx di ambil = ' + lidx[fixidx]);
+            updateAi(lidx[fixidx], 5, 1);
             return lidx[fixidx];
         } else {
             addLog(lidx[0] + ' | idx ke lumbung');
             addLog('idx di ambil = ' + lidx[0]);
+            updateAi(lidx[0], 5, 1);
             return lidx[0];
         }
     } else {
@@ -169,9 +178,11 @@ function optIdx() {
             // Mencari min untuk player
             fixidx = findMin(optidx);
             addLog('idx minimum = ' + lidx[fixidx]);
+            updateAi(lidx[fixidx], 5, 1);
             return lidx[fixidx];
         } else {
             addLog('idx ke lumbung = ' + lidx[0]);
+            updateAi(lidx[0], 5, 1);
             return lidx[0];
         }
     } else {
@@ -202,6 +213,7 @@ function optIdx() {
         }
 
         addLog(fixidx + ' | idx max lumbung');
+        updateAi(fixidx, 5, 1);
         return fixidx;
     }
 }

@@ -61,7 +61,8 @@ function findIdxAI() {
                         if (papan[nidx] > 1) {
                             i = 1;
                             jml = papan[nidx];
-                            papan[nidx] = 0;                        idxtemp = nidx;
+                            papan[nidx] = 0;
+                            idxtemp = nidx;
                             // ambil lagi
                         } else {
                             if (nidx < 7) {

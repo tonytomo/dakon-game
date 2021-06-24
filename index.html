@@ -46,7 +46,7 @@
         </div>
         <div class="gamecontrol">
             <!-- Clear log -->
-            <button onmousedown="botFirst()" class="rulebtn" id="skip">BOT DULU</button>
+            <button onmousedown="botFirst()" class="skipbtn" id="skip">BOT DULU</button>
 
             <!-- Toggle stats -->
             <button onmousedown="ruleToggle()" class="rulebtn">ATURAN</button>
@@ -64,35 +64,36 @@
             <button onmousedown="changeMode()" class="modebtn" id="modebtn">EASY</button>
 
             <!-- Clear log -->
-            <button onmousedown="clearLog()" class="clearbtn">CLEAR LOG</button>
+            <button onmousedown="clearLog()" class="clearbtn" id="clearbtn">CLEAR LOG</button>
 
             <!-- Toggle stats -->
-            <button onmousedown="statToggle()" class="logbtn">STATS</button>
+            <button onmousedown="statToggle()" class="logbtn" id="statbtn">STATS</button>
+        </div>
+
+        <!-- Notifikasi -->
+        <div class="notif" id="notif">
+            <!-- Diisi notif dengan javascript -->
+            <p>Game mulai!</p>
+        </div>
+
+        <!-- Pikiran AI -->
+        <div class="aibot" id="aibot" style="display: none;">
+            <p class="aibox">0.5</p>
+            <p class="aibox">0.5</p>
+            <p class="aibox">0.5</p>
+            <p class="aibox">0.5</p>
+            <p class="aibox">0.5</p>
+            <p class="aibox">0.5</p>
+            <p class="aibox">0.5</p>
         </div>
     </div>
 
     <!-- Diagram AI dan Log -->
-    <div class="stat" id="stat">
-        <div class="aibot">
-            <p class="aibox">0.5</p>
-            <p class="aibox">0.5</p>
-            <p class="aibox">0.5</p>
-            <p class="aibox">0.5</p>
-            <p class="aibox">0.5</p>
-            <p class="aibox">0.5</p>
-            <p class="aibox">0.5</p>
-        </div>
-        <hr>
+    <div class="stat" id="stat" style="display: none;">
         <div class="log" id="logs">
             <h2>LOG</h2>
             <ul id="log"></ul>
         </div>
-    </div>
-
-    <!-- Notifikasi -->
-    <div class="notif" id="notif">
-        <!-- Diisi notif dengan javascript -->
-        <p>Game mulai!</p>
     </div>
 
     <!-- Modal box berisi aturan -->

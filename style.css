@@ -21,34 +21,28 @@ body {
 .aibot {
     position: absolute;
     top: 0;
-    right: 300px;
-
-    /* width: 100%; */
-    /* height: 15%; */
+    left: 0;
+    right: 0;
     box-sizing: border-box;
     background-color: #222;
-    border-radius: 0 0 0 10px;
     padding: 1em;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 40px;
 }
 
 .aibot>* {
     margin: 0;
-
     /* height: 25px;
     width: 35px;
     padding-top: 8px;
     font-size: 11pt;
      */
-
     height: 43px;
     width: 60px;
     padding-top: 15px;
     font-size: 18pt;
-
     border-radius: 50%;
     background-color: #444;
     color: #fff;
@@ -79,13 +73,10 @@ hr {
         width: 100%;
         flex-direction: row;
     }
-    .aibot {
-        transform: translateX(0);
-    }
     hr {
         display: block;
     }
-    .aibot, .log {
+    .log {
         position: static;
         flex-basis: 100%;
         height: 200px;
@@ -120,13 +111,14 @@ hr {
 }
 
 .container {
+    position: relative;
     padding: 1em;
     flex-basis: 100%;
     text-align: center;
 }
 
 .title {
-    margin: 0 auto .5em;
+    margin: 0 auto;
     /* 336 x 103 */
     /* 546 x 99 */
     width: 546px;
@@ -202,6 +194,15 @@ canvas {
     cursor: pointer;
 }
 
+.skipbtn {
+    display: block;
+    background-color: #021e55;
+}
+
+.skipbtn:hover {
+    background-color: #1e4388;
+}
+
 .rulebtn {
     background-color: #021e55;
 }
@@ -227,6 +228,7 @@ canvas {
 }
 
 .clearbtn {
+    display: block;
     background-color: #851212;
 }
 
