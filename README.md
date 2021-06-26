@@ -23,7 +23,7 @@ Dakon/Congklak adalah suatu permainan tradisional yang dikenal dengan berbagai m
 ## Fitur (sementara)
 
 1. Bisa main melawan BOT, atau juga bisa PVP.
-1. Bisa pilih mode BOT, ada RANDOM, MAX, AI (belum bisa).
+1. Bisa pilih mode BOT, ada EASY (random), MEDIUM (semi minimax), EXPERT (algoritma minimax).
 1. Bisa mengatur jumlah biji awal.
 1. Log untuk setiap perubahan (untuk debug), menggunakan fungsi
 ```
