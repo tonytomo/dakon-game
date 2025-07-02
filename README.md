@@ -1,33 +1,43 @@
-# GAME DAKON
+# Dakon Game
 
-<img src="assets/dakon.JPG" width="507" height="190">
+<img src="assets/dakon.JPG" width="507" height="190"/>
 
-_Game tradisional di Indonesia. Game ini dibuat menggunakan pure HTML, CSS, dan JS._
+*This is a traditional Indonesian game built using pure HTML, CSS, and JavaScript.*
 
-## Apa itu dakon
+-----
 
-Dakon/Congklak adalah suatu permainan tradisional yang dikenal dengan berbagai macam nama di seluruh Indonesia. Biasanya dalam permainan, sejenis cangkang kerang digunakan sebagai biji congklak dan jika tidak ada, kadang kala digunakan juga biji-bijian dari tumbuh-tumbuhan dan batu-batu kecil.
+## What is Dakon?
 
-## Aturan bermain
+Dakon, also known as Congklak in some regions, is a popular traditional board game played across Indonesia. Players typically use **cowrie shells** as game pieces, though **seeds** or **small stones** are also common alternatives.
 
-1. Permainan dakon adalah permainan giliran, jika salah satu pemain sedang bermain, pemain lainnya tidak dapat melakukan apa-apa sampai mendapat giliran.
-1. Ada 2 daerah, yaitu daerah pemain 1 dan pemain 2. Setiap daerah ada 7 lubang dan 1 lumbung.
-1. Pemain yang mendapat giliran dapat mengambil biji dari salah satu lubang di daerahnya. Lalu diputar searah jarum jam ke lubang berikutnya.
-1. Ketika berputar, setiap melewati lubang harus menaruh 1 biji (semua lubang kecuali lumbung lawan).
-1. Jika biji di tangan habis di lubang yang berisi biji, maka pemain harus mengambil semua biji di lubang tersebut lalu biji diputar kembali seperti di langkah 4.
-1. Jika biji di tangan habis di lumbung, maka pemain bisa bermain kembali seperti di langkah 3.
-1. Jika biji di tangan habis di lubang di daerahnya yang kosong, maka pemain mengambil semua biji di lubang tersebut dan lubang lawan yang berseberangan, lalu dimasukan ke lumbungnya.
-1. Jika biji di tangan habis di lubang di daerah lawan yang kosong, maka giliran pemain itu sudah selesai.
-1. Jika lubang kecil di daerah pemain yang mendapat giliran kosong semua, maka permainan selesai. Semua biji yang ada di daerahnya masuk ke lumbung masing-masing pemain.
+-----
 
-## Fitur (sementara)
+## How to Play
 
-1. Bisa main melawan BOT, atau juga bisa PVP.
-1. Bisa pilih mode BOT, ada EASY (random), MEDIUM (semi minimax), EXPERT (algoritma minimax).
-1. Bisa mengatur jumlah biji awal.
-1. Log untuk setiap perubahan (untuk debug), menggunakan fungsi
-```
-addLog('pesan');
-```
+Dakon is a **turn-based game** where players take turns distributing "seeds" around a board. Here are the rules:
 
-__Silahkan bermain. kalo ada bug bilang..__
+1.  **Turns:** Only one player can make a move at a time. The other player must wait until their turn begins.
+2.  **The Board:** Each player has a "region" with **seven small holes** and **one larger "barn"** (or "lumbung").
+3.  **Starting a Turn:** On your turn, choose one of the small holes in your region and pick up all the seeds from it.
+4.  **Distributing Seeds:** Move clockwise, dropping one seed into each subsequent hole, **skipping your opponent's barn**.
+5.  **Continuing Your Turn (Collecting Seeds):** If the last seed in your hand lands in a hole that already contains seeds, **collect all the seeds from that hole** and continue distributing them as in rule 4.
+6.  **Continuing Your Turn (Landing in Your Barn):** If the last seed in your hand lands in your own barn, **you get to take another turn** from any hole in your region (as in rule 3).
+7.  **Capturing Seeds:** If the last seed in your hand lands in an **empty hole in your own region**, you capture all the seeds from that hole and all the seeds from the **opposite hole in your opponent's region**. All captured seeds go into your barn.
+8.  **Ending Your Turn:** If the last seed in your hand lands in an **empty hole in your opponent's region**, your turn ends.
+9.  **Game End:** The game ends when all the small holes in a player's region are empty at the start of their turn. All remaining seeds in the small holes are then moved to their respective player's barn. The player with the most seeds in their barn wins.
+
+-----
+
+## Features (Current)
+
+  * **Player vs. Environment (PvE) or Player vs. Player (PvP):** Play against an AI opponent or challenge a friend.
+  * **AI Difficulty Levels:**
+      * **EASY:** Random moves.
+      * **MEDIUM:** Semi-minimax algorithm.
+      * **EXPERT:** Full minimax algorithm.
+  * **Configurable Starting Seeds:** Adjust the initial number of seeds in each hole.
+  * **Debugging Log:** Utilize the `addLog('message');` function for real-time debugging.
+
+-----
+
+Feel free to play\! If you encounter any bugs, please let us know.
